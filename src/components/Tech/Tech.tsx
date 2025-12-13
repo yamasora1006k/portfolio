@@ -15,8 +15,9 @@ export default function Tech() {
                     Hello, I'm <span style={{ color: 'var(--text-secondary)' }}>a Developer.</span>
                 </h2>
                 <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', maxWidth: '600px' }}>
-                    I build accessible, pixel-perfect, and performant web experiences.
-                    Focused on simplicity and purpose.
+                    私が開発したものを紹介します。<br />
+                    クリックで詳細確認ができます。<br />
+                    Cmd+クリックで新しいタブでGitHubが開きます。
                 </p>
             </section>
 

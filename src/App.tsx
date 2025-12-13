@@ -13,26 +13,26 @@ function AnimatedRoutes() {
   const navigate = useNavigate();
 
   useShortcut("ArrowLeft", () => {
-    if (location.pathname === "/") {
-      navigate("/act");
-    } else if (location.pathname === "/act") {
-      navigate("/");
+    if (location.pathname === "/Portfolio/") {
+      navigate("/Portfolio/act");
+    } else if (location.pathname === "/Portfolio/act") {
+      navigate("/Portfolio/");
     }
   });
 
   useShortcut("ArrowRight", () => {
-    if (location.pathname === "/") {
-      navigate("/act");
-    } else if (location.pathname === "/act") {
-      navigate("/");
+    if (location.pathname === "/Portfolio/") {
+      navigate("/Portfolio/act");
+    } else if (location.pathname === "/Portfolio/act") {
+      navigate("/Portfolio/");
     }
   });
 
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Tech />} />
-        <Route path="/act" element={<Activity />} />
+        <Route path="/Portfolio/" element={<Tech />} />
+        <Route path="/Portfolio/act" element={<Activity />} />
       </Routes>
     </AnimatePresence>
   );
