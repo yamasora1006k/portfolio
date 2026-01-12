@@ -1,4 +1,11 @@
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+
+const navItems = [
+    { label: "About", path: "/" },
+    { label: "Tech", path: "/tech" },
+    { label: "Activities", path: "/act" },
+];
 export default function Header({ location, style }: { location: string, style?: React.CSSProperties }) {
     const navigate = useNavigate();
     return (
@@ -14,23 +21,38 @@ export default function Header({ location, style }: { location: string, style?: 
             ...style
         }}>
             <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <img src={`${import.meta.env.BASE_URL}/img/logo/MIYANO_WH.png`} alt="" style={{ height: 'calc(var(--nav-height) * 2)' }} />
+                <img src={`${import.meta.env.BASE_URL}/img/logo/MIYANO_WH.svg`} alt="" style={{ height: 'calc(var(--nav-height) /3)', objectFit: 'contain' }} />
                 <nav style={{ display: 'flex', gap: '1.5rem', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-                    {location === "/" ? null :
-                        <a onClick={() => { navigate("/") }}>About</a>
-                    }
-                    {location === "/act" ?
-                        <a onClick={() => { document.getElementById("acts")?.scrollIntoView({ behavior: "smooth" }) }}>Activities</a>
-                        : location === "/tech" ?
-                            <a onClick={() => { document.getElementById("works")?.scrollIntoView({ behavior: "smooth" }) }}>Works</a>
-                            : location === "/" ?
-                                <>
-                                    <a onClick={() => { navigate("/tech") }}>Tech</a>
-                                    <a onClick={() => { navigate("/act") }}>Activities</a>
-                                </>
-                                : null
-                    }
-                    <a onClick={() => { document.getElementById("footer")?.scrollIntoView({ behavior: "smooth" }) }}>Contact</a>
+                    {navItems.map((item) => {
+                        const isActive = location === item.path;
+                        return (
+                            <a
+                                key={item.path}
+                                onClick={() => { navigate(item.path) }}
+                                style={{
+                                    cursor: 'pointer',
+                                    position: 'relative',
+                                    color: isActive ? '#ffffff' : 'var(--text-secondary)',
+                                    transition: 'color 0.3s ease'
+                                }}
+                            >
+                                {item.label}
+                                {isActive && (
+                                    <motion.div
+                                        layoutId="underline"
+                                        style={{
+                                            position: 'absolute',
+                                            left: 0,
+                                            right: 0,
+                                            bottom: -2,
+                                            height: '1px',
+                                            backgroundColor: '#ffffff'
+                                        }}
+                                    />
+                                )}
+                            </a>
+                        )
+                    })}
                 </nav>
             </div>
         </header>

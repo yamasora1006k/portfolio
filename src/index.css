@@ -146,3 +146,29 @@ h3 {
   justify-content: center;
   align-items: center;
 }
+
+
+.anim-hover-16 {
+  all: unset;
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-weight: bold;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+}
+
+.anim-hover-16 span {
+  display: inline-block;
+  transition: transform 0.3s;
+}
+
+.anim-hover-16:hover span {
+  transform: translateX(8px);
+}
+
+.anim-hover-16:hover {
+  color: var(--accent-color);
+}

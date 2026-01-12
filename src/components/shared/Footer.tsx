@@ -1,12 +1,12 @@
 export default function Footer() {
     return (
         <footer id="contact" style={{
-            padding: '4rem 0 2rem',
+            padding: '2rem 0 2rem',
             textAlign: 'center',
             fontSize: '0.8rem',
             color: 'var(--text-secondary)',
             borderTop: '1px solid rgba(255, 255, 255, 0.05)',
-            marginTop: '4rem'
+            marginTop: '2rem'
         }}>
             <div className="container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3rem' }}>
 

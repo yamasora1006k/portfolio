@@ -1,14 +1,13 @@
 import { motion } from "framer-motion";
-import Header from "../shared/Header";
-import { useLocation } from "react-router-dom";
-import { FadeInFromLeft } from "../shared/conpornents";
+import { useLocation, useNavigate } from "react-router-dom";
+import { FadeInFromLeft } from "../shared/components";
 import Theme_ico from "./Theme_ico";
 
 export default function Aboutme() {
+    const navigate = useNavigate();
     const location = useLocation();
     return (
         <>
-            <Header location={location.pathname} style={{ zIndex: 10 }} />
             <section style={{
                 height: 'calc(100vh)',
                 marginTop: 'calc(var(--nav-height) * -1)',
@@ -41,8 +40,7 @@ export default function Aboutme() {
                     transition={{ duration: 1, delay: 0.2 }}
                     style={{ textAlign: 'center', zIndex: 1 }}
                 >
-
-                    <img src={`${import.meta.env.BASE_URL}img/logo/MIYANO_Studio_WH.png`} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
+                    <img src={`${import.meta.env.BASE_URL}img/logo/MIYANO_Studio_WH.svg`} alt="" style={{ width: 'min(90vw, 1000px)', objectFit: 'contain', objectPosition: 'center' }} />
 
                 </motion.div>
 
@@ -117,8 +115,8 @@ export default function Aboutme() {
                         </FadeInFromLeft>
                         <FadeInFromLeft>
                             <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'space-between' }}>
-                                <Theme_ico title="Tech" description="技術" />
-                                <Theme_ico title="Activity" description="活動" />
+                                <Theme_ico id="tech" title="Tech" description="技術" onClick={() => { navigate('/tech') }} />
+                                <Theme_ico id="act" title="Activity" description="活動" onClick={() => { navigate('/act') }} />
                             </div>
                         </FadeInFromLeft>
                     </div>

@@ -1,26 +1,40 @@
 import type { JSX } from "react";
 import { motion } from "framer-motion";
+import RotateThings from "./RotateThings";
 interface Props {
-    who: string;
+    id: string;
     onArrowClick?: () => void;
     description: JSX.Element;
+    next: string;
 }
-export default function Main_head({ who, onArrowClick, description }: Props) {
+export default function Main_head({ id, next, onArrowClick, description }: Props) {
+    const imgId = id === "act" ? "Works" : "Dev";
     return (
         <motion.main initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -50 }} transition={{ duration: 0.5 }}>
             <section id="about" style={{ marginBottom: '6rem', position: 'relative', height: '150px', scrollMarginTop: 'var(--nav-height)' }}>
                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                     <div>
-                        <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: 'var(--text-color)' }}>
-                            私の<span style={{ color: 'var(--text-secondary)' }}>{who}</span>
-                        </h2>
+                        <img src={`${import.meta.env.BASE_URL}img/logo/MIYANO_${imgId}_WH.svg`} alt="" style={{ height: 'calc(var(--nav-height) /3)', objectFit: 'contain' }} />
                         <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', maxWidth: '600px' }}>
                             {description}
                         </p>
                     </div>
+                    <div
+                        ref={RotateThings({ id })}
+                        style={{
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            width: "100%",
+                            height: "100%",
+                            zIndex: 0,
+                            opacity: 0.6,
+                            pointerEvents: "none",
+                        }}
+                    />
 
-                    {onArrowClick && <div style={{ alignItems: 'center', display: 'flex', width: '60px', justifyContent: 'end', cursor: 'pointer' }} onClick={onArrowClick}>
-                        <p style={{ fontSize: '1.5rem', color: 'var(--text-secondary)' }} >→</p>
+                    {onArrowClick && <div className="anim-hover-16" style={{ alignItems: 'center', display: 'flex', flexDirection: 'row', justifyContent: 'end', cursor: 'pointer' }} onClick={onArrowClick}>
+                        <p style={{ fontSize: '1.5rem' }} >{next}<span>→</span></p>
                     </div>}
                 </div>
             </section>
