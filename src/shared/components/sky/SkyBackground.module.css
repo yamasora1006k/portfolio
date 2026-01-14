@@ -1,0 +1,119 @@
+.skyBackground {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-sky, -10);
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.skyBackground.ready {
+  opacity: 1;
+}
+
+.skyGradient {
+  position: absolute;
+  inset: 0;
+  background: var(--sky-background);
+  transition: background 3s ease;
+}
+
+/* Clouds container */
+.cloudsContainer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* Cloud component - fluffy white cloud */
+.cloud {
+  position: absolute;
+  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.1));
+  animation: cloudFloat 60s linear infinite;
+  will-change: transform;
+}
+
+.cloudSmall {
+  transform: scale(0.5);
+}
+
+.cloudMedium {
+  transform: scale(0.8);
+}
+
+.cloudLarge {
+  transform: scale(1.2);
+}
+
+/* Cloud bubbles - creates the fluffy shape */
+.cloudBubble1,
+.cloudBubble2,
+.cloudBubble3,
+.cloudBubble4,
+.cloudBase {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+}
+
+.cloudBase {
+  width: 200px;
+  height: 60px;
+  bottom: 0;
+  left: 0;
+  border-radius: 100px;
+}
+
+.cloudBubble1 {
+  width: 80px;
+  height: 80px;
+  bottom: 30px;
+  left: 20px;
+}
+
+.cloudBubble2 {
+  width: 100px;
+  height: 100px;
+  bottom: 35px;
+  left: 55px;
+}
+
+.cloudBubble3 {
+  width: 70px;
+  height: 70px;
+  bottom: 40px;
+  left: 120px;
+}
+
+.cloudBubble4 {
+  width: 50px;
+  height: 50px;
+  bottom: 25px;
+  left: 155px;
+}
+
+@keyframes cloudFloat {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(100vw);
+  }
+}
+
+/* Responsive cloud sizes */
+@media (max-width: 768px) {
+  .cloudSmall {
+    transform: scale(0.3);
+  }
+
+  .cloudMedium {
+    transform: scale(0.5);
+  }
+
+  .cloudLarge {
+    transform: scale(0.7);
+  }
+}
