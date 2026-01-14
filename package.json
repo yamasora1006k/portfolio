@@ -11,7 +11,10 @@
     "deploy": "npm run build && echo mappinist.com > dist/CNAME && gh-pages -d dist"
   },
   "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.5.0",
     "framer-motion": "^12.23.26",
+    "maath": "^0.10.8",
     "matter-js": "^0.20.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",

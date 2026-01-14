@@ -1,4 +1,3 @@
-
 import Tech from "./components/Tech/Tech";
 import Activity from "./components/Activity/Activity";
 import Footer from "./components/shared/Footer";
@@ -7,6 +6,7 @@ import { HashRouter, Routes, Route, useLocation, useNavigate, useNavigationType 
 import { AnimatePresence } from "framer-motion";
 import { useShortcut } from "./components/shared/shortcut";
 import Header from "./components/shared/Header";
+import ThreeBackground from "./components/ThreeBackground";
 
 /* ここが Router 内で動く本体 */
 function AnimatedRoutes() {
@@ -51,6 +51,7 @@ import ScrollTo from "./components/shared/ScrollTo";
 export default function App() {
   return (
     <HashRouter>
+      <ThreeBackground />
       <AnimatedRoutes />
       <Footer />
     </HashRouter>
