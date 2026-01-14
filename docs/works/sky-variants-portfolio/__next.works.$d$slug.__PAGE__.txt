@@ -1,0 +1,7 @@
+1:"$Sreact.fragment"
+2:I[63644,["/portfolio/_next/static/chunks/fb8f9e6fc5034eaf.js","/portfolio/_next/static/chunks/cac843cba39b6c74.js"],"WorkDetailView"]
+3:I[97367,["/portfolio/_next/static/chunks/ff1a16fafef87110.js","/portfolio/_next/static/chunks/7340adf74ff47ec0.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+:HL["/portfolio/_next/static/chunks/8000be338fa77dea.css","style"]
+0:{"buildId":"eVPCPQ0H6vxUibzx5z_Wq","rsc":["$","$1","c",{"children":[["$","$L2",null,{"work":{"id":"1","slug":"sky-variants-portfolio","title":"SKY VARIANTS","description":"動的に変化する空をコンセプトにしたポートフォリオサイト","thumbnail":"/images/works/sky-variants.jpg","category":"Web Development","technologies":["Next.js","TypeScript","CSS"],"year":2024,"featured":true,"background":"ポートフォリオサイトを刷新するにあたり、「同じ人でも、見る人・見る瞬間によって違う印象を持つ」という体験を設計したいと考えました。","challenge":"単なる作品一覧ではなく、訪問するたびに異なる印象を与えるUIを実現すること。","role":"デザイン・開発（フルスタック）","process":"コンセプト策定 → ワイヤーフレーム → Sky Change Systemの設計 → 実装 → テスト","implementation":"Next.js App Routerを使用し、CSS Variablesとシード付き乱数で「破綻しないランダム」を実現。","outcome":"訪問するたびに異なる空が表示され、滞在中も徐々に変化するインタラクティブな体験を実現。","lessons":"ランダム性と再現性のバランス、パフォーマンスを考慮したアニメーション設計の重要性を学びました。"}}],[["$","link","0",{"rel":"stylesheet","href":"/portfolio/_next/static/chunks/8000be338fa77dea.css","precedence":"next"}],["$","script","script-0",{"src":"/portfolio/_next/static/chunks/cac843cba39b6c74.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"loading":null,"isPartial":false}
+5:null
