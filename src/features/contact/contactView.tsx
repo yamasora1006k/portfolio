@@ -8,6 +8,7 @@ import {
     FormStatus,
     subjectOptions
 } from './models/contact';
+import { sendContactForm } from './services/contactService';
 
 // バリデーション
 function validateForm(data: ContactFormData): ContactFormErrors {
@@ -70,18 +71,9 @@ export function ContactView() {
         setStatus('submitting');
 
         try {
-            const response = await fetch('/api/contact', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData),
-            });
-
-            if (response.ok) {
-                setStatus('success');
-                setFormData({ name: '', email: '', subject: '', message: '' });
-            } else {
-                setStatus('error');
-            }
+            await sendContactForm(formData);
+            setStatus('success');
+            setFormData({ name: '', email: '', subject: '', message: '' });
         } catch {
             setStatus('error');
         }
