@@ -259,7 +259,7 @@ export default function AdminPage() {
                                             </p>
                                         </div>
                                         <div style={{ display: 'flex', gap: '8px' }}>
-                                            <Link href={`/admin/posts/${post.id}`}>
+                                            <Link href={`/admin/posts/edit?id=${post.id}`}>
                                                 <Button variant="secondary" size="sm">編集</Button>
                                             </Link>
                                             <Button variant="ghost" size="sm" onClick={() => handlePostDelete(post.id)} style={{ color: '#ef4444' }}>削除</Button>

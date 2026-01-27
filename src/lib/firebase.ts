@@ -15,13 +15,26 @@ const firebaseConfig = {
     measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
+// 設定が有効かどうかチェック
+const isConfigValid = !!(
+    firebaseConfig.apiKey &&
+    firebaseConfig.authDomain &&
+    firebaseConfig.projectId &&
+    firebaseConfig.appId
+);
+
 // Firebaseアプリの初期化（シングルトン）
-let app: FirebaseApp;
-let db: Firestore;
-let storage: FirebaseStorage;
+let app: FirebaseApp | null = null;
+let db: Firestore | null = null;
+let storage: FirebaseStorage | null = null;
 let analytics: Analytics | null = null;
 
-function initializeFirebase(): FirebaseApp {
+function initializeFirebase(): FirebaseApp | null {
+    if (!isConfigValid) {
+        console.warn('Firebase config is incomplete, skipping initialization');
+        return null;
+    }
+
     if (getApps().length === 0) {
         app = initializeApp(firebaseConfig);
     } else {
@@ -34,6 +47,9 @@ function initializeFirebase(): FirebaseApp {
 export function getFirestoreDb(): Firestore {
     if (!db) {
         const app = initializeFirebase();
+        if (!app) {
+            throw new Error('Firebase is not configured');
+        }
         db = getFirestore(app);
     }
     return db;
@@ -43,6 +59,9 @@ export function getFirestoreDb(): Firestore {
 export function getFirebaseStorage(): FirebaseStorage {
     if (!storage) {
         const app = initializeFirebase();
+        if (!app) {
+            throw new Error('Firebase is not configured');
+        }
         storage = getStorage(app);
     }
     return storage;
@@ -58,25 +77,30 @@ export async function initializeAnalytics(): Promise<Analytics | null> {
         const supported = await isSupported();
         if (supported) {
             const app = initializeFirebase();
-            analytics = getAnalytics(app);
+            if (app) {
+                analytics = getAnalytics(app);
+            }
         }
     }
     return analytics;
 }
 
 // Firebaseアプリのエクスポート
-export function getFirebaseApp(): FirebaseApp {
+export function getFirebaseApp(): FirebaseApp | null {
     return initializeFirebase();
 }
 
 // Authの取得
 import { getAuth, Auth } from 'firebase/auth';
 
-let auth: Auth;
+let auth: Auth | null = null;
 
 export function getFirebaseAuth(): Auth {
     if (!auth) {
         const app = initializeFirebase();
+        if (!app) {
+            throw new Error('Firebase is not configured');
+        }
         auth = getAuth(app);
     }
     return auth;
