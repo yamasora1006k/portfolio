@@ -1,70 +1,73 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import styles from './aboutView.module.css';
-
-const skills = [
-    { category: 'Frontend', items: ['React', 'Next.js', 'TypeScript', 'Vue.js'] },
-    { category: 'Backend', items: ['Node.js', 'Python', 'PostgreSQL', 'Firebase'] },
-    { category: 'Design', items: ['Figma', 'Adobe XD', 'Photoshop', 'Illustrator'] },
-    { category: 'Mobile', items: ['Flutter', 'React Native', 'Swift'] },
-];
-
-const experiences = [
-    {
-        period: '2023 - Present',
-        title: 'Freelance Designer & Developer',
-        description: 'Webデザイン・開発のフリーランスとして活動。',
-    },
-    {
-        period: '2021 - 2023',
-        title: 'Web Developer',
-        description: 'フロントエンド開発を中心に、UI/UXデザインも担当。',
-    },
-];
+import { AboutData } from './models/about';
+import { fetchAboutData } from './services/aboutService';
 
 export function AboutView() {
+    const [data, setData] = useState<AboutData | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function load() {
+            const aboutData = await fetchAboutData();
+            setData(aboutData);
+            setLoading(false);
+        }
+        load();
+    }, []);
+
+    if (loading || !data) {
+        return (
+            <div className={styles.aboutPage}>
+                <div className="container" style={{ textAlign: 'center', paddingTop: '100px' }}>
+                    <p>Loading...</p>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className={styles.aboutPage}>
             <div className="container">
-                {/* Header */}
+                {/* ヘッダー */}
                 <header className={styles.header}>
                     <h1 className="section-heading">
                         <span>About</span>
                     </h1>
                 </header>
 
-                {/* Profile */}
+                {/* プロフィール */}
                 <section className={styles.profile}>
                     <div className={styles.profileImage}>
-                        <div className={styles.profileImagePlaceholder} />
+                        {data.profileImage ? (
+                            <img src={data.profileImage} alt={data.name} className={styles.profileImg} />
+                        ) : (
+                            <div className={styles.profileImagePlaceholder} />
+                        )}
                     </div>
 
                     <div className={styles.profileContent}>
-                        <h2 className={styles.name}>山口 空</h2>
-                        <p className={styles.role}>Designer & Developer</p>
+                        <h2 className={styles.name}>{data.name}</h2>
+                        <p className={styles.role}>{data.role}</p>
 
                         <div className={styles.bio}>
-                            <p>
-                                デザインと開発の両方のスキルを活かし、
-                                ユーザー体験を大切にしたプロダクトを作っています。
-                            </p>
-                            <p>
-                                「同じ空でも、見るたびに違う」——
-                                このサイトのように、一面的ではない表現を通じて、
-                                プロジェクトごとに最適な解決策を提案します。
-                            </p>
+                            {data.bio.map((paragraph, idx) => (
+                                <p key={idx}>{paragraph}</p>
+                            ))}
                         </div>
                     </div>
                 </section>
 
-                {/* Skills */}
+                {/* スキル */}
                 <section className={styles.skills}>
                     <h2 className="section-heading">
                         <span>Skills</span>
                     </h2>
 
                     <div className={styles.skillsGrid}>
-                        {skills.map((skillGroup) => (
+                        {data.skills.map((skillGroup) => (
                             <div key={skillGroup.category} className={styles.skillGroup}>
                                 <h3 className={styles.skillCategory}>{skillGroup.category}</h3>
                                 <ul className={styles.skillList}>
@@ -79,20 +82,33 @@ export function AboutView() {
                     </div>
                 </section>
 
-                {/* Experience */}
+                {/* 経歴 */}
                 <section className={styles.experience}>
                     <h2 className="section-heading">
                         <span>Experience</span>
                     </h2>
 
                     <div className={styles.timeline}>
-                        {experiences.map((exp, idx) => (
-                            <div key={idx} className={styles.timelineItem}>
-                                <span className={styles.timelinePeriod}>{exp.period}</span>
-                                <h3 className={styles.timelineTitle}>{exp.title}</h3>
-                                <p className={styles.timelineDescription}>{exp.description}</p>
-                            </div>
-                        ))}
+                        {data.experiences.map((exp, idx) => {
+                            // 日付表示のフォーマット
+                            const formatDate = (dateStr?: string) => {
+                                if (!dateStr) return '現在';
+                                const date = new Date(dateStr);
+                                return `${date.getFullYear()}年${date.getMonth() + 1}月`;
+                            };
+
+                            const displayPeriod = exp.startDate
+                                ? formatDate(exp.startDate)
+                                : exp.period;
+
+                            return (
+                                <div key={idx} className={styles.timelineItem}>
+                                    <span className={styles.timelinePeriod}>{displayPeriod}</span>
+                                    <h3 className={styles.timelineTitle}>{exp.title}</h3>
+                                    <p className={styles.timelineDescription}>{exp.description}</p>
+                                </div>
+                            );
+                        })}
                     </div>
                 </section>
             </div>

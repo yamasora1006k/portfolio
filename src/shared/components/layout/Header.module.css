@@ -13,6 +13,15 @@
     backdrop-filter: blur(10px);
 }
 
+.header.scrolled .logo,
+.header.scrolled .navLink {
+    color: var(--text-on-card-primary);
+}
+
+.header.scrolled .menuLine {
+    background: var(--text-on-card-primary);
+}
+
 .container {
     max-width: 1400px;
     margin: 0 auto;
@@ -21,7 +30,7 @@
     justify-content: space-between;
 }
 
-/* Logo */
+/* ロゴ */
 .logo {
     text-decoration: none;
     color: var(--sky-text-primary);
@@ -39,7 +48,7 @@
     letter-spacing: 0.05em;
 }
 
-/* Desktop Navigation */
+/* デスクトップナビゲーション */
 .desktopNav {
     display: none;
 }
@@ -97,7 +106,7 @@
     left: 0;
 }
 
-/* Mobile Menu Button */
+/* モバイルメニューボタン */
 .menuButton {
     display: flex;
     flex-direction: column;
@@ -138,7 +147,7 @@
     transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Mobile Navigation */
+/* モバイルナビゲーション */
 .mobileNav {
     position: fixed;
     top: 0;

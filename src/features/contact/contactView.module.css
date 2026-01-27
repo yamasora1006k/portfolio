@@ -12,7 +12,7 @@
     margin-top: var(--space-4);
 }
 
-/* Form Wrapper */
+/* フォームラッパー */
 .formWrapper {
     max-width: 600px;
     margin: 0 auto;
@@ -22,7 +22,7 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* Form */
+/* フォーム */
 .form {
     display: flex;
     flex-direction: column;
@@ -38,7 +38,7 @@
 .label {
     font-size: var(--text-sm);
     font-weight: 500;
-    color: var(--sky-text-primary);
+    color: var(--text-on-card-primary);
 }
 
 .required {
@@ -46,7 +46,7 @@
 }
 
 .optional {
-    color: var(--sky-text-secondary);
+    color: var(--text-on-card-secondary);
     font-weight: 400;
 }
 
@@ -57,7 +57,7 @@
     padding: var(--space-4);
     font-size: var(--text-base);
     font-family: inherit;
-    color: var(--sky-text-primary);
+    color: var(--text-on-card-primary);
     background: #f8f8f8;
     border: 1px solid #e0e0e0;
     border-radius: var(--radius-lg);
@@ -74,7 +74,7 @@
 
 .input::placeholder,
 .textarea::placeholder {
-    color: var(--sky-text-secondary);
+    color: var(--text-on-card-secondary);
     opacity: 0.7;
 }
 
@@ -101,7 +101,7 @@
     color: #ef4444;
 }
 
-/* Submit Button */
+/* 送信ボタン */
 .submitButton {
     display: inline-flex;
     align-items: center;
@@ -155,7 +155,7 @@
     text-align: center;
 }
 
-/* Success State */
+/* 送信成功時 */
 .successMessage {
     text-align: center;
     padding: var(--space-8);
@@ -177,11 +177,11 @@
 .successTitle {
     font-size: var(--text-2xl);
     margin-bottom: var(--space-4);
-    color: var(--sky-text-primary);
+    color: var(--text-on-card-primary);
 }
 
 .successText {
-    color: var(--sky-text-secondary);
+    color: var(--text-on-card-secondary);
     margin-bottom: var(--space-8);
     line-height: 1.8;
 }

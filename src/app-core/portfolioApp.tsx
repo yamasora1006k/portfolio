@@ -7,7 +7,7 @@ interface PortfolioAppProps {
     children: ReactNode;
 }
 
-// Inner component that uses searchParams
+// searchParams を使う内側コンポーネント
 function PortfolioAppInner({ children }: PortfolioAppProps) {
     return (
         <SkyProvider>
@@ -16,7 +16,7 @@ function PortfolioAppInner({ children }: PortfolioAppProps) {
     );
 }
 
-// Main app wrapper with Suspense for searchParams
+// searchParams用に Suspense を挟んだアプリ全体のラッパー
 export function PortfolioApp({ children }: PortfolioAppProps) {
     return (
         <Suspense fallback={<div className="app-loading" />}>

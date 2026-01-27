@@ -1,4 +1,4 @@
-// Application-wide constants
+// アプリ全体で使う定数
 export const BREAKPOINTS = {
     mobile: 480,
     tablet: 900,
@@ -6,24 +6,27 @@ export const BREAKPOINTS = {
     wide: 1201,
 } as const;
 
-// Tap target minimum size (accessibility)
+// タップターゲットの最小サイズ（アクセシビリティ）
 export const MIN_TAP_TARGET_SIZE = 44;
 
-// Sky Change System timing
+// ベースパス（next.config.tsと合わせる）
+export const BASE_PATH = '/portfolio';
+
+// Sky Change System のタイミング設定
 export const SKY_TIMING = {
     entryTransitionMin: 800,
     entryTransitionMax: 1800,
     minorChangeInterval: {
-        min: 30000,   // 30 seconds
-        max: 120000,  // 2 minutes
+        min: 30000,   // 30秒
+        max: 120000,  // 2分
     },
     majorChangeThreshold: {
-        min: 300000,  // 5 minutes
-        max: 480000,  // 8 minutes
+        min: 300000,  // 5分
+        max: 480000,  // 8分
     },
 } as const;
 
-// Sky Theme parameter ranges
+// スカイテーマのパラメータ範囲
 export const SKY_PARAMS = {
     hue: { min: 0, max: 360 },
     saturation: { min: 20, max: 80 },
@@ -33,7 +36,7 @@ export const SKY_PARAMS = {
     axisVisibility: { min: 10, max: 50 },
 } as const;
 
-// URL parameter keys
+// URLパラメータキー
 export const URL_PARAMS = {
     skyTheme: 'sky',
     worksFilter: 'filter',
@@ -43,16 +46,17 @@ export const URL_PARAMS = {
     worksTech: 'tech',
 } as const;
 
-// Local storage keys
+// ローカルストレージキー
 export const STORAGE_KEYS = {
     skyTheme: 'sky-variants-theme',
     skyPreference: 'sky-variants-preference',
 } as const;
 
-// Navigation links
+// ナビゲーションリンク
 export const NAV_LINKS = [
     { href: '/', label: 'Home' },
     { href: '/works', label: 'Works' },
     { href: '/about', label: 'About' },
+    { href: '/blog', label: 'Blog' },
     { href: '/contact', label: 'Contact' },
 ] as const;

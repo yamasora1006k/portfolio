@@ -3,17 +3,50 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './SkyBackground.module.css';
 import { useSky } from '@/app-core/providers/ThemeProvider';
+import { BASE_PATH } from '@/app-core/config/constants';
 
-// Cloud shape component
-function Cloud({ style, size = 'medium' }: { style?: React.CSSProperties; size?: 'small' | 'medium' | 'large' }) {
+// 雲の形コンポーネント
+function Cloud({
+    x,
+    y,
+    opacity,
+    speed,
+    size = 'medium'
+}: {
+    x: number;
+    y: number;
+    opacity: number;
+    speed: number;
+    size?: 'small' | 'medium' | 'large';
+}) {
     const sizeClass = styles[`cloud${size.charAt(0).toUpperCase() + size.slice(1)}`];
+
+    // アニメーションの開始遅延と持続時間を計算
+    // delayをマイナスに設定することで、アニメーションの途中から開始しているように見せる
+    const animationStyle = {
+        animationDuration: `${60 / speed}s`,
+        animationDelay: `${-(x / 100) * (60 / speed)}s`, // X位置に基づいてアニメーションの時間をずらす
+    };
+
     return (
-        <div className={`${styles.cloud} ${sizeClass}`} style={style}>
-            <div className={styles.cloudBubble1} />
-            <div className={styles.cloudBubble2} />
-            <div className={styles.cloudBubble3} />
-            <div className={styles.cloudBubble4} />
-            <div className={styles.cloudBase} />
+        <div
+            className={styles.cloudWrapper}
+            style={{
+                top: `${y}%`,
+                left: 0, // アニメーションで移動するので左端基準
+                opacity: opacity
+            }}
+        >
+            <div className={styles.cloudMover} style={animationStyle}>
+                <div className={`${styles.cloudScale} ${sizeClass}`}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                        src={`${BASE_PATH}/assets/imgs/home/cloud.png`}
+                        alt=""
+                        className={styles.cloudImage}
+                    />
+                </div>
+            </div>
         </div>
     );
 }
@@ -29,15 +62,19 @@ export function SkyBackground() {
         opacity: number;
     }>>([]);
 
-    // Generate random clouds on mount
+    // マウント時にランダムな雲を生成
     useEffect(() => {
+        if (!skyState.theme.showClouds) {
+            setClouds([]);
+            return;
+        }
         const numClouds = Math.floor(skyState.theme.cloudDensity / 15) + 3;
         const newClouds = Array.from({ length: numClouds }, (_, i) => ({
             id: i,
-            x: Math.random() * 120 - 10, // -10% to 110% for seamless scroll
-            y: Math.random() * 60 + 5, // 5% to 65% from top
+            x: Math.random() * 120 - 10, // シームレスに流れるよう -10% 〜 110%
+            y: Math.random() * 60 + 5, // 上から5%〜65%の高さ
             size: ['small', 'medium', 'large'][Math.floor(Math.random() * 3)] as 'small' | 'medium' | 'large',
-            speed: 0.5 + Math.random() * 1.5, // Varying speeds
+            speed: 0.5 + Math.random() * 1.5, // 速度にばらつきをつける
             opacity: 0.7 + Math.random() * 0.3,
         }));
         setClouds(newClouds);
@@ -48,22 +85,19 @@ export function SkyBackground() {
             className={`${styles.skyBackground} ${isReady ? styles.ready : ''}`}
             aria-hidden="true"
         >
-            {/* Sky gradient */}
+            {/* 空のグラデーション */}
             <div className={styles.skyGradient} />
 
-            {/* Clouds */}
+            {/* 雲 */}
             <div className={styles.cloudsContainer}>
                 {clouds.map((cloud) => (
                     <Cloud
                         key={cloud.id}
                         size={cloud.size}
-                        style={{
-                            left: `${cloud.x}%`,
-                            top: `${cloud.y}%`,
-                            opacity: cloud.opacity,
-                            animationDuration: `${60 / cloud.speed}s`,
-                            animationDelay: `${-cloud.x / 2}s`,
-                        }}
+                        x={cloud.x}
+                        y={cloud.y}
+                        opacity={cloud.opacity}
+                        speed={cloud.speed}
                     />
                 ))}
             </div>

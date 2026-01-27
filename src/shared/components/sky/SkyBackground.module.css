@@ -19,83 +19,57 @@
   transition: background 3s ease;
 }
 
-/* Clouds container */
+/* 雲のコンテナ */
 .cloudsContainer {
   position: absolute;
   inset: 0;
   overflow: hidden;
 }
 
-/* Cloud component - fluffy white cloud */
-.cloud {
+/* 雲のラッパー（位置決め） */
+.cloudWrapper {
   position: absolute;
-  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.1));
+  pointer-events: none;
+}
+
+/* 雲のアニメーション（移動） */
+.cloudMover {
   animation: cloudFloat 60s linear infinite;
   will-change: transform;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 雲のスケール（サイズ調整） */
+.cloudScale {
+  /* ここにスケール変換が適用されます */
+  display: block;
+}
+
+.cloudImage {
+  width: 300px;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.9;
+  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.1));
 }
 
 .cloudSmall {
-  transform: scale(0.5);
+  transform: scale(0.4);
 }
 
 .cloudMedium {
-  transform: scale(0.8);
+  transform: scale(0.7);
 }
 
 .cloudLarge {
-  transform: scale(1.2);
-}
-
-/* Cloud bubbles - creates the fluffy shape */
-.cloudBubble1,
-.cloudBubble2,
-.cloudBubble3,
-.cloudBubble4,
-.cloudBase {
-  position: absolute;
-  background: white;
-  border-radius: 50%;
-}
-
-.cloudBase {
-  width: 200px;
-  height: 60px;
-  bottom: 0;
-  left: 0;
-  border-radius: 100px;
-}
-
-.cloudBubble1 {
-  width: 80px;
-  height: 80px;
-  bottom: 30px;
-  left: 20px;
-}
-
-.cloudBubble2 {
-  width: 100px;
-  height: 100px;
-  bottom: 35px;
-  left: 55px;
-}
-
-.cloudBubble3 {
-  width: 70px;
-  height: 70px;
-  bottom: 40px;
-  left: 120px;
-}
-
-.cloudBubble4 {
-  width: 50px;
-  height: 50px;
-  bottom: 25px;
-  left: 155px;
+  transform: scale(1.0);
 }
 
 @keyframes cloudFloat {
   0% {
-    transform: translateX(0);
+    transform: translateX(-50vw);
   }
 
   100% {
@@ -103,7 +77,7 @@
   }
 }
 
-/* Responsive cloud sizes */
+/* レスポンシブな雲のサイズ */
 @media (max-width: 768px) {
   .cloudSmall {
     transform: scale(0.3);

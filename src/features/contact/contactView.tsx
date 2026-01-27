@@ -9,23 +9,23 @@ import {
     subjectOptions
 } from './models/contact';
 
-// Validation
+// バリデーション
 function validateForm(data: ContactFormData): ContactFormErrors {
     const errors: ContactFormErrors = {};
 
-    // Email is required
+    // メールアドレスは必須
     if (!data.email.trim()) {
         errors.email = 'メールアドレスは必須です';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
         errors.email = '有効なメールアドレスを入力してください';
     }
 
-    // Subject is required
+    // 用件は必須
     if (!data.subject) {
         errors.subject = '用件を選択してください';
     }
 
-    // Message is required
+    // メッセージは必須
     if (!data.message.trim()) {
         errors.message = 'メッセージを入力してください';
     } else if (data.message.length < 10) {
@@ -51,7 +51,7 @@ export function ContactView() {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
 
-        // Clear error when user starts typing
+        // 入力開始時にエラーをクリア
         if (errors[name as keyof ContactFormErrors]) {
             setErrors(prev => ({ ...prev, [name]: undefined }));
         }
@@ -60,7 +60,7 @@ export function ContactView() {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
 
-        // Validate
+        // バリデーションを実行
         const validationErrors = validateForm(formData);
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
@@ -117,7 +117,7 @@ export function ContactView() {
                         </div>
                     ) : (
                         <form onSubmit={handleSubmit} className={styles.form}>
-                            {/* Name (optional) */}
+                            {/* お名前（任意） */}
                             <div className={styles.formGroup}>
                                 <label htmlFor="name" className={styles.label}>
                                     お名前 <span className={styles.optional}>(任意)</span>
@@ -133,7 +133,7 @@ export function ContactView() {
                                 />
                             </div>
 
-                            {/* Email (required) */}
+                            {/* メールアドレス（必須） */}
                             <div className={styles.formGroup}>
                                 <label htmlFor="email" className={styles.label}>
                                     メールアドレス <span className={styles.required}>*</span>
@@ -153,7 +153,7 @@ export function ContactView() {
                                 )}
                             </div>
 
-                            {/* Subject (required) */}
+                            {/* 用件（必須） */}
                             <div className={styles.formGroup}>
                                 <label htmlFor="subject" className={styles.label}>
                                     用件 <span className={styles.required}>*</span>
@@ -178,7 +178,7 @@ export function ContactView() {
                                 )}
                             </div>
 
-                            {/* Message (required) */}
+                            {/* メッセージ（必須） */}
                             <div className={styles.formGroup}>
                                 <label htmlFor="message" className={styles.label}>
                                     メッセージ <span className={styles.required}>*</span>
@@ -198,7 +198,7 @@ export function ContactView() {
                                 )}
                             </div>
 
-                            {/* Submit */}
+                            {/* 送信ボタン */}
                             <button
                                 type="submit"
                                 className={styles.submitButton}

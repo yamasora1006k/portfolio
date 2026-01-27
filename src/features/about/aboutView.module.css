@@ -7,7 +7,7 @@
     text-align: center;
 }
 
-/* Profile */
+/* プロフィール */
 .profile {
     display: grid;
     grid-template-columns: 1fr;
@@ -67,18 +67,18 @@
 .name {
     font-size: var(--text-4xl);
     margin-bottom: var(--space-2);
-    color: var(--sky-text-primary);
+    color: var(--text-on-card-primary);
 }
 
 .role {
     font-size: var(--text-lg);
-    color: var(--sky-accent);
+    color: #475569;
     margin-bottom: var(--space-6);
 }
 
 .bio p {
     font-size: var(--text-base);
-    color: var(--sky-text-secondary);
+    color: var(--text-on-card-secondary);
     line-height: 1.8;
     margin-bottom: var(--space-4);
 }
@@ -87,7 +87,7 @@
     margin-bottom: 0;
 }
 
-/* Skills */
+/* スキル */
 .skills {
     margin-bottom: var(--space-20);
 }
@@ -128,7 +128,7 @@
 
 .skillItem {
     font-size: var(--text-sm);
-    color: var(--sky-text-secondary);
+    color: var(--text-on-card-secondary);
     padding: var(--space-2) 0;
     border-bottom: 1px solid #f0f0f0;
 }
@@ -137,7 +137,7 @@
     border-bottom: none;
 }
 
-/* Experience */
+/* 経歴 */
 .experience {
     max-width: 700px;
     margin: 0 auto;
@@ -145,6 +145,10 @@
     background: white;
     border-radius: var(--radius-xl);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.experience h2 {
+    color: #1e293b;
 }
 
 .timeline {
@@ -196,10 +200,10 @@
 .timelineTitle {
     font-size: var(--text-xl);
     margin: var(--space-2) 0;
-    color: var(--sky-text-primary);
+    color: var(--text-on-card-primary);
 }
 
 .timelineDescription {
     font-size: var(--text-base);
-    color: var(--sky-text-secondary);
+    color: var(--text-on-card-secondary);
 }

@@ -18,7 +18,7 @@ export function useWorksFilter() {
     const router = useRouter();
     const pathname = usePathname();
 
-    // Parse current filter from URL
+    // 現在のフィルターをURLから読み込む
     const filter: WorksFilter = useMemo(() => ({
         category: searchParams.get(URL_PARAMS.worksFilter) || 'all',
         technology: searchParams.get(URL_PARAMS.worksTech),
@@ -29,7 +29,7 @@ export function useWorksFilter() {
         sort: (searchParams.get(URL_PARAMS.worksSort) as SortOption) || 'newest',
     }), [searchParams]);
 
-    // Update URL with new filter
+    // フィルター変更をURLに反映
     const updateFilter = useCallback((updates: Partial<WorksFilter>) => {
         const newFilter = { ...filter, ...updates };
         const params = new URLSearchParams();

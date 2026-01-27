@@ -5,7 +5,7 @@
     flex-direction: column;
 }
 
-/* Header */
+/* ヘッダー */
 .header {
     display: flex;
     justify-content: space-between;
@@ -28,7 +28,7 @@
     letter-spacing: -0.02em;
 }
 
-/* Main content */
+/* メインコンテンツ */
 .content {
     flex: 1;
     display: grid;
@@ -43,7 +43,7 @@
     }
 }
 
-/* Categories - Left side */
+/* カテゴリ（左側） */
 .categories {
     display: flex;
     flex-direction: column;
@@ -51,95 +51,90 @@
     padding-top: var(--space-12);
 }
 
-/* Category Cloud */
+/* カテゴリの雲 */
 .categoryCloud {
     position: relative;
     display: flex;
     align-items: center;
-    gap: var(--space-4);
+    gap: var(--space-6);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.6;
+    transform: translateX(0);
+}
+
+.categoryCloud:hover,
+.categoryCloud.active {
+    opacity: 1;
+    transform: translateX(20px);
 }
 
 .categoryCloud:hover .categoryText,
 .categoryCloud.active .categoryText {
     color: var(--sky-text-primary);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
 }
 
-.categoryCloud:hover .cloudShape,
-.categoryCloud.active .cloudShape {
-    opacity: 1;
-    transform: scale(1);
-}
-
-/* Cloud shape */
-.cloudShape {
+/* 雲の画像コンテナ */
+.cloudImageContainer {
     position: absolute;
-    left: 0;
+    left: -60px;
     top: 50%;
-    transform: translateY(-50%) scale(0.8);
+    transform: translateY(-50%) scale(0.5);
+    width: 300px;
+    height: 300px;
     opacity: 0;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
     pointer-events: none;
     z-index: -1;
+    filter: blur(10px);
 }
 
-.cloudBubble1,
-.cloudBubble2,
-.cloudBubble3,
-.cloudBase {
-    position: absolute;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 50%;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+.categoryCloud:hover .cloudImageContainer,
+.categoryCloud.active .cloudImageContainer {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+    filter: blur(0);
 }
 
-.cloudBase {
-    width: 180px;
-    height: 50px;
-    bottom: -25px;
-    left: -20px;
-    border-radius: 100px;
+.cloudImage {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    animation: float 6s ease-in-out infinite;
 }
 
-.cloudBubble1 {
-    width: 60px;
-    height: 60px;
-    bottom: 0;
-    left: 0;
-}
+@keyframes float {
 
-.cloudBubble2 {
-    width: 80px;
-    height: 80px;
-    bottom: 10px;
-    left: 35px;
-}
+    0%,
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
 
-.cloudBubble3 {
-    width: 50px;
-    height: 50px;
-    bottom: 5px;
-    left: 100px;
+    50% {
+        transform: translateY(-10px) rotate(2deg);
+    }
 }
 
 .categoryNumber {
     font-size: var(--text-sm);
-    color: rgba(0, 0, 0, 0.3);
-    font-weight: 400;
+    color: var(--sky-text-secondary, rgba(0, 0, 0, 0.4));
+    font-weight: 500;
+    font-family: var(--font-mono);
     min-width: 30px;
 }
 
 .categoryText {
-    font-size: clamp(2rem, 5vw, 4rem);
-    font-weight: 300;
-    color: rgba(0, 0, 0, 0.15);
-    letter-spacing: -0.02em;
-    transition: color 0.3s ease;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-family: var(--font-display);
+    font-weight: 200;
+    color: rgba(0, 0, 0, 0.2);
+    letter-spacing: -0.03em;
+    transition: all 0.4s ease;
     text-transform: lowercase;
 }
 
-/* Previews - Right side */
+/* プレビュー（右側） */
 .previews {
     position: relative;
     display: flex;
@@ -150,89 +145,129 @@
 
 .previewContainer {
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 100%;
     height: 100%;
+    min-height: 400px;
 }
 
 .previewContainer.visible {
     opacity: 1;
 }
 
-/* Preview Card */
+/* プレビューカード - トランプ扇状配置 */
 .previewCard {
     position: absolute;
-    width: 200px;
-    height: 260px;
-    background: white;
-    border-radius: var(--radius-lg);
+    width: 140px;
+    height: 180px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: var(--radius-xl);
     overflow: hidden;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    animation: cardAppear 0.5s ease forwards;
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.08),
+        0 1px 3px rgba(255, 255, 255, 0.5) inset;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: cardAppear 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
     opacity: 0;
+    transform: translate(-50%, -100%) rotate(var(--rotate, 0deg));
 }
 
 .previewCard:hover {
-    transform: rotate(0deg) scale(1.05) !important;
+    transform: translate(-50%, -100%) rotate(0deg) scale(1.1) !important;
     z-index: 10 !important;
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 100, 200, 0.2);
+    border-color: rgba(255, 255, 255, 1);
 }
 
 @keyframes cardAppear {
-    from {
+    0% {
         opacity: 0;
-        transform: translateY(20px) rotate(0deg);
+        transform: translate(-50%, -50%) rotate(0deg) scale(0.5);
     }
 
-    to {
+    100% {
         opacity: 1;
+        transform: translate(-50%, -100%) rotate(var(--rotate, 0deg));
     }
 }
+
 
 .previewImage {
     width: 100%;
     height: 100%;
+    position: relative;
+    background: white;
+}
+
+.projectThumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.previewCard:hover .projectThumb {
+    transform: scale(1.1);
 }
 
 .previewImagePlaceholder {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg,
-            #e8f4f8 0%,
-            #d0e8f0 50%,
-            #c0dce8 100%);
+    background: linear-gradient(180deg,
+            rgba(232, 244, 248, 0.5) 0%,
+            rgba(208, 232, 240, 0.8) 100%);
     display: flex;
-    align-items: flex-end;
-    padding: var(--space-4);
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-6);
+    text-align: center;
 }
 
 .projectTitle {
-    font-size: var(--text-sm);
+    font-size: var(--text-lg);
     font-weight: 500;
-    color: var(--sky-text-primary);
-    background: white;
-    padding: var(--space-2) var(--space-3);
-    border-radius: var(--radius-base);
+    color: var(--text-on-card-primary);
+    font-family: var(--font-display);
+    line-height: 1.4;
 }
 
-/* Active category label */
+/* アクティブカテゴリのラベル */
 .activeCategoryLabel {
     position: absolute;
-    bottom: 20%;
+    bottom: 15%;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: var(--space-2);
-    padding: var(--space-6) var(--space-10);
-    background: rgba(100, 100, 100, 0.9);
-    color: white;
-    border-radius: var(--radius-lg);
-    animation: labelAppear 0.3s ease;
+    padding: var(--space-12) var(--space-16);
+    background-image: url('/portfolio/assets/imgs/home/cloud.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: #334155;
+    /* 白い雲の上なので濃い色にする */
+    min-width: 280px;
+    min-height: 160px;
+    justify-content: center;
+    z-index: 10;
+    /* カードより前に表示 */
+    animation: labelAppear 0.3s ease, cloudFloat 4s ease-in-out infinite;
+}
+
+@keyframes cloudFloat {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(-10px);
+    }
 }
 
 @keyframes labelAppear {
@@ -258,7 +293,45 @@
     text-transform: lowercase;
 }
 
-/* All works link */
+.labelDescription {
+    font-size: var(--text-sm);
+    opacity: 0.7;
+    text-align: center;
+    max-width: 300px;
+}
+
+/* 作品数バッジ */
+.workCount {
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--sky-accent);
+    color: white;
+    font-size: var(--text-xs);
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.categoryCloud:hover .workCount,
+.categoryCloud.active .workCount {
+    opacity: 1;
+}
+
+/* ローディング */
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    color: var(--sky-text-secondary);
+    font-size: var(--text-lg);
+}
+
+/* 全作品リンク */
 .allWorksLink {
     display: flex;
     justify-content: center;
@@ -279,7 +352,7 @@
     color: white;
 }
 
-/* Mobile adjustments */
+/* モバイル用調整 */
 @media (max-width: 900px) {
     .header {
         flex-direction: column;

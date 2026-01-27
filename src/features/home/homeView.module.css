@@ -7,103 +7,228 @@
     opacity: 1;
 }
 
-/* Hero Section */
+/* ヒーローセクション */
 .hero {
     min-height: 100vh;
+    padding: var(--space-8);
+    padding-bottom: 25vh;
+    /* 大幅に上に配置 */
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+/* アンビエントレイヤー（背景の空気感） */
+.ambientLayer {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.lightOrb {
+    position: absolute;
+    top: -10%;
+    right: -10%;
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 70%);
+    filter: blur(60px);
+    opacity: 0.6;
+    animation: orbFloat 20s ease-in-out infinite alternate;
+}
+
+.lightOrbSecondary {
+    position: absolute;
+    bottom: -10%;
+    left: -10%;
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 70%);
+    filter: blur(80px);
+    opacity: 0.4;
+    animation: orbFloat 25s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes orbFloat {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate(5%, 10%) scale(1.1);
+    }
+}
+
+.heroLayout {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+    padding: 0 var(--space-4);
+}
+
+@media (min-width: 900px) {
+    .heroLayout {
+        grid-template-columns: 1.5fr 1fr;
+        align-items: center;
+    }
+}
+
+.mainContent {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    text-align: center;
-    padding: var(--space-16) var(--space-6);
-    position: relative;
-}
-
-.heroContent {
-    max-width: 800px;
-}
-
-.title {
-    font-size: clamp(2.5rem, 10vw, 6rem);
-    font-weight: 700;
-    line-height: 1.1;
-    margin-bottom: var(--space-6);
-    letter-spacing: -0.02em;
-    color: var(--sky-text-primary);
-}
-
-.titleLine {
-    display: block;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.8s ease forwards;
-}
-
-.titleLine:nth-child(2) {
-    animation-delay: 0.2s;
 }
 
 .subtitle {
-    font-size: var(--text-xl);
+    font-size: var(--text-lg);
+    font-weight: 500;
     color: var(--sky-text-secondary);
     margin-bottom: var(--space-4);
+    letter-spacing: 0.05em;
     opacity: 0;
-    animation: fadeInUp 0.8s ease 0.4s forwards;
+    animation: subtleFadeIn 1s ease 0.2s forwards;
+}
+
+.title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    line-height: 0.9;
+    margin-bottom: var(--space-10);
+    color: var(--sky-text-primary);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.titleLine {
+    font-size: clamp(5rem, 15vw, 10rem);
+    display: block;
+    opacity: 0;
+    transform: translateY(40px);
+    animation: slideUpFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s forwards;
+    /* 空に溶け込むような表現 */
+    background: linear-gradient(to bottom right, #fff, var(--sky-text-primary));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 4px 12px rgba(139, 196, 232, 0.2));
+}
+
+.titleWord {
+    font-size: clamp(5rem, 15vw, 10rem);
+    display: block;
+    opacity: 0;
+    transform: translateY(40px);
+    animation: slideUpFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.6s forwards;
+    margin-left: 0.5em;
+    /* 少しずらす */
+}
+
+/* 概念テキスト */
+.conceptArea {
+    position: relative;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding-bottom: var(--space-24);
 }
 
 .concept {
-    font-size: var(--text-lg);
-    color: var(--sky-accent);
-    font-style: italic;
-    margin-bottom: var(--space-10);
+    font-size: var(--text-2xl);
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--sky-text-primary);
     opacity: 0;
-    animation: fadeInUp 0.8s ease 0.6s forwards;
+    animation: subtleFadeIn 1.5s ease 1s forwards;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    letter-spacing: 0.3em;
+    mix-blend-mode: overlay;
 }
 
-.cta {
+@media (max-width: 900px) {
+    .conceptArea {
+        display: none;
+        /* モバイルではシンプルに */
+    }
+
+    .titleWord {
+        margin-left: 0;
+    }
+}
+
+/* CTAボタン */
+.ctaWrapper {
     opacity: 0;
-    animation: fadeInUp 0.8s ease 0.8s forwards;
+    animation: subtleFadeIn 1s ease 1.2s forwards;
 }
 
 .ctaButton {
     display: inline-flex;
     align-items: center;
-    gap: var(--space-3);
-    padding: var(--space-4) var(--space-8);
-    font-size: var(--text-base);
-    font-weight: 500;
-    color: white;
-    background: var(--sky-accent);
+    gap: var(--space-4);
+    padding: var(--space-5) var(--space-10);
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
     border-radius: var(--radius-full);
-    box-shadow: 0 4px 12px rgba(45, 90, 123, 0.3);
-    transition: all 0.3s ease;
+    color: #1e293b;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+}
+
+.ctaText {
+    font-size: var(--text-lg);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+}
+
+.ctaIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: var(--sky-accent);
+    border-radius: 50%;
+    color: white;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .ctaButton:hover {
+    background: rgba(255, 255, 255, 0.9);
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(45, 90, 123, 0.4);
+    box-shadow: 0 8px 32px rgba(139, 196, 232, 0.3);
+    padding-right: var(--space-8);
+    /* アイコンが動く分の余白調整 */
 }
 
-.ctaArrow {
-    transition: transform 0.3s ease;
+.ctaButton:hover .ctaIcon {
+    transform: translateX(8px) rotate(-45deg);
+    /* 斜め上に飛ぶような動き */
+    background: #1a365d;
 }
 
-.ctaButton:hover .ctaArrow {
-    transform: translateX(4px);
-}
-
-/* Scroll Indicator */
+/* スクロールインジケーター */
 .scrollIndicator {
     position: absolute;
-    bottom: var(--space-8);
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: var(--space-10);
+    left: var(--space-10);
+    /* 左下に配置変更 */
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: var(--space-2);
+    gap: var(--space-4);
     opacity: 0;
-    animation: fadeIn 1s ease 1.2s forwards;
+    animation: subtleFadeIn 1s ease 1.5s forwards;
 }
 
 .scrollText {
@@ -111,72 +236,216 @@
     text-transform: uppercase;
     letter-spacing: 0.2em;
     color: var(--sky-text-secondary);
+    writing-mode: vertical-lr;
+    /* 縦書き */
+    transform: rotate(180deg);
+    /* 下から上へ読む */
 }
 
 .scrollLine {
     width: 1px;
-    height: 40px;
-    background: linear-gradient(to bottom,
-            var(--sky-text-secondary),
-            transparent);
-    animation: scrollBounce 2s ease infinite;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
 }
 
-@keyframes scrollBounce {
+.scrollLine::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--sky-accent);
+    transform: translateY(-100%);
+    animation: scrollDown 2.5s cubic-bezier(0.8, 0, 0.2, 1) infinite;
+}
 
-    0%,
-    100% {
-        transform: translateY(0);
-        opacity: 1;
+@keyframes scrollDown {
+    0% {
+        transform: translateY(-100%);
     }
 
     50% {
-        transform: translateY(10px);
-        opacity: 0.5;
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(100%);
     }
 }
 
-/* Featured Section */
+@keyframes slideUpFade {
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes subtleFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* 注目作品セクション */
 .featured {
     padding: var(--space-24) 0;
+    text-align: left;
+    /* 左寄せに変更 */
+    position: relative;
+    z-index: 1;
+}
+
+/* 巨大な背景文字 (WORKS) */
+.featured::before {
+    content: 'WORKS';
+    position: absolute;
+    top: 10%;
+    left: -20px;
+    font-size: clamp(8rem, 20vw, 15rem);
+    font-weight: 900;
+    font-family: var(--font-display);
+    color: rgba(255, 255, 255, 0.03);
+    z-index: -1;
+    pointer-events: none;
+    white-space: nowrap;
+    line-height: 1;
+    -webkit-text-stroke: 2px rgba(255, 255, 255, 0.1);
+}
+
+/* 光のエフェクト (左側) */
+.featured::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 0;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 70%);
+    filter: blur(90px);
+    z-index: -2;
+    pointer-events: none;
+    animation: flowLight 8s ease-in-out infinite alternate;
+}
+
+@keyframes flowLight {
+    0% {
+        transform: translateX(-10%) scale(1);
+    }
+
+    100% {
+        transform: translateX(10%) scale(1.1);
+    }
 }
 
 .featuredGrid {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    display: flex;
+    overflow-x: auto;
     gap: var(--space-8);
     margin-bottom: var(--space-12);
+    padding-bottom: var(--space-8);
+    /* スクロールバーの干渉を防ぐ */
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    /* スクロールバー装飾（オプション: 非表示にする） */
+    scrollbar-width: none;
+    /* Firefox */
 }
 
+.featuredGrid::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari */
+}
+
+/* PC等でのグリッド設定を上書き（削除） */
 @media (min-width: 768px) {
     .featuredGrid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: none;
     }
 }
 
 @media (min-width: 1024px) {
     .featuredGrid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: none;
     }
 }
 
 .featuredCard {
+    flex: 0 0 300px;
     display: block;
+    max-width: none;
     border-radius: var(--radius-xl);
     overflow: hidden;
-    background: white;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0, 40, 80, 0.05);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease, border-radius 0.4s ease;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    /* Safariでの角のチラつき防止 */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    position: relative;
+    /* スタッキングコンテキスト生成 */
+    isolation: isolate;
+}
+
+@media (min-width: 768px) {
+    .featuredCard {
+        flex: 0 0 360px;
+    }
+
+    .featuredCard:nth-child(even) {
+        transform: translateY(0);
+        margin-top: 40px;
+    }
 }
 
 .featuredCard:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px) scale(1.02) !important;
+    /* 少し拡大も含める */
+    box-shadow: 0 20px 40px rgba(139, 196, 232, 0.2);
+    border-color: rgba(255, 255, 255, 0.95);
+    z-index: 2;
+    border-radius: 0;
 }
 
 .cardImage {
     aspect-ratio: 16/10;
     overflow: hidden;
+    position: relative;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    transition: border-radius 0.4s ease;
+    /* 上部の角丸を明示 */
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    mask-image: radial-gradient(white, black);
+    /* Safariバグ対策の強力なハック */
+}
+
+.featuredCard:hover .cardImage {
+    border-radius: 0;
+}
+
+.cardImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.featuredCard:hover .cardImg {
+    transform: scale(1.05);
 }
 
 .cardImagePlaceholder {
@@ -195,80 +464,201 @@
 .cardTitle {
     font-size: var(--text-xl);
     margin-bottom: var(--space-2);
-    color: var(--sky-text-primary);
+    font-weight: 700;
+    color: #1e293b;
+    /* 背景が白いので文字は濃い色（Slate 800） */
 }
 
 .cardCategory {
     font-size: var(--text-sm);
-    color: var(--sky-text-secondary);
+    color: #64748b;
+    /* 背景が白いので文字は中間色（Slate 500） */
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
 }
 
 .viewAll {
-    text-align: center;
+    text-align: right;
+    /* デフォルトは右寄せ */
+    padding-top: var(--space-8);
+}
+
+.featured .viewAll {
+    text-align: left;
+    /* Worksセクションは左寄せ */
 }
 
 .viewAllLink {
     display: inline-flex;
     align-items: center;
-    gap: var(--space-2);
+    flex-direction: row-reverse;
+    gap: var(--space-4);
     font-size: var(--text-base);
-    color: var(--sky-accent);
-    font-weight: 500;
-    transition: opacity 0.2s ease;
+    color: var(--sky-text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: var(--space-3) var(--space-8);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-full);
+    backdrop-filter: blur(4px);
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .viewAllLink:hover {
-    opacity: 0.7;
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 8px 30px rgba(139, 196, 232, 0.2);
+    transform: translateY(-2px);
+    gap: var(--space-6);
+    opacity: 1;
+    /* hover時のopacity上書き */
 }
 
 .viewAllArrow {
-    transition: transform 0.2s ease;
+    transition: transform 0.4s ease;
 }
 
 .viewAllLink:hover .viewAllArrow {
     transform: translateX(4px);
 }
 
-/* About Preview */
+/* 自己紹介のプレビュー */
 .aboutPreview {
-    padding: var(--space-24) 0;
+    padding: var(--space-32) 0;
+    position: relative;
+    /* 右寄せレイアウトのために右側へ寄せる */
+    display: flex;
+    justify-content: flex-end;
 }
 
+/* テキストエリアの存在感を高める */
+/* テキストエリアの存在感を高める */
 .aboutContent {
-    max-width: 600px;
-    margin: 0 auto;
-    text-align: center;
+    width: 100%;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: 0;
+    text-align: right;
+    position: relative;
+    z-index: 1;
+    padding-right: var(--space-4);
+}
+
+/* 巨大な背景文字 */
+.aboutContent::before {
+    content: 'ABOUT';
+    position: absolute;
+    top: 50%;
+    right: -50px;
+    transform: translateY(-50%);
+    font-size: clamp(8rem, 20vw, 15rem);
+    font-weight: 900;
+    font-family: var(--font-display);
+    color: rgba(255, 255, 255, 0.03);
+    /* 極めて薄く */
+    z-index: -1;
+    pointer-events: none;
+    white-space: nowrap;
+    line-height: 1;
+    /* アウトライン化 */
+    -webkit-text-stroke: 2px rgba(255, 255, 255, 0.1);
+}
+
+/* 光のエフェクト（背景文字のさらに後ろ） */
+.aboutContent::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+    filter: blur(80px);
+    z-index: -2;
+    pointer-events: none;
+    animation: pulseGlow 5s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGlow {
+    0% {
+        opacity: 0.5;
+        transform: translateY(-50%) scale(1);
+    }
+
+    100% {
+        opacity: 0.8;
+        transform: translateY(-50%) scale(1.1);
+    }
+}
+
+.section-heading {
+    margin-bottom: var(--space-8);
+    position: relative;
+    display: inline-block;
+}
+
+.section-heading span {
+    font-size: var(--text-5xl);
+    /* さらに大きく */
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--sky-text-primary);
+    background: linear-gradient(135deg, #fff 0%, var(--sky-text-primary) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 4px 12px rgba(139, 196, 232, 0.2));
 }
 
 .aboutText {
-    font-size: var(--text-lg);
-    color: var(--sky-text-secondary);
-    line-height: 1.8;
-    margin-bottom: var(--space-8);
+    font-size: var(--text-xl);
+    font-weight: 300;
+    color: var(--sky-text-primary);
+    line-height: 2.2;
+    margin-bottom: var(--space-12);
+    font-feature-settings: "palt";
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    opacity: 0.9;
 }
 
 .aboutLink {
     display: inline-flex;
     align-items: center;
-    gap: var(--space-2);
-    color: var(--sky-accent);
-    font-weight: 500;
-    transition: opacity 0.2s ease;
+    flex-direction: row-reverse;
+    gap: var(--space-4);
+    font-size: var(--text-base);
+    color: var(--sky-text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: var(--space-3) var(--space-8);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-full);
+    backdrop-filter: blur(4px);
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .aboutLink:hover {
-    opacity: 0.7;
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 8px 30px rgba(139, 196, 232, 0.2);
+    transform: translateY(-2px);
+    gap: var(--space-6);
 }
 
 .aboutArrow {
-    transition: transform 0.2s ease;
+    transition: transform 0.4s ease;
 }
 
 .aboutLink:hover .aboutArrow {
     transform: translateX(4px);
 }
 
-/* Animations */
+/* アニメーション */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -289,4 +679,148 @@
     to {
         opacity: 1;
     }
+}
+
+/* ブログセクション */
+.blog {
+    padding: var(--space-24) 0;
+    text-align: right;
+    /* 右寄せに変更 */
+    position: relative;
+    z-index: 1;
+}
+
+/* 巨大な背景文字 (BLOG) */
+.blog::before {
+    content: 'BLOG';
+    position: absolute;
+    top: 10%;
+    left: -20px;
+    /* Aboutと同じく左側（いや、Aboutは右側だったはずだが、バランス的に左？） */
+    /* About: right: -50px, Works: left: -20px */
+    /* User wants "Like About Me" -> About is right aligned */
+    /* If About has background text on RIGHT, then Blog should likely differ or match? */
+    /* Works (Left Align) -> Text Left */
+    /* Abput (Right Align) -> Text Right */
+    /* Blog (Right Align) -> Text Right (right: -20px) */
+    right: -20px;
+    left: auto;
+    font-size: clamp(8rem, 20vw, 15rem);
+    font-weight: 900;
+    font-family: var(--font-display);
+    color: rgba(255, 255, 255, 0.03);
+    z-index: -1;
+    pointer-events: none;
+    white-space: nowrap;
+    line-height: 1;
+    -webkit-text-stroke: 2px rgba(255, 255, 255, 0.1);
+}
+
+/* 光のエフェクト (右側) */
+.blog::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    right: 0;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 70%);
+    filter: blur(90px);
+    z-index: -2;
+    pointer-events: none;
+    animation: flowLightRight 8s ease-in-out infinite alternate;
+}
+
+@keyframes flowLightRight {
+    0% {
+        transform: translateX(10%) scale(1);
+    }
+
+    100% {
+        transform: translateX(-10%) scale(1.1);
+    }
+}
+
+.blogGrid {
+    display: flex;
+    overflow-x: auto;
+    gap: var(--space-8);
+    margin-bottom: var(--space-12);
+    padding-bottom: var(--space-8);
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* 右寄せレイアウト用 */
+    flex-direction: row-reverse;
+    /* row-reverseにすると最新記事が右に来る（日本語は左から読むので逆順になるのが気になるが、UX的には右端が起点） */
+}
+
+.blogGrid::-webkit-scrollbar {
+    display: none;
+}
+
+.blogCard {
+    flex: 0 0 300px;
+    display: block;
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    background: rgba(255, 255, 255, 0.6);
+    /* Worksより少し透明度を上げる */
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0, 40, 80, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, background 0.4s ease;
+}
+
+@media (min-width: 768px) {
+    .blogCard {
+        flex: 0 0 340px;
+    }
+}
+
+.blogCard:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 12px 40px rgba(139, 196, 232, 0.2);
+}
+
+.blogInfo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.blogDate {
+    font-size: var(--text-sm);
+    color: var(--sky-text-secondary);
+    font-family: var(--font-mono);
+}
+
+.blogTitle {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--sky-text-primary);
+    line-height: 1.5;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.blogCategories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: auto;
+}
+
+.blogCategory {
+    font-size: var(--text-xs);
+    color: var(--sky-text-secondary);
+    padding: var(--space-1) var(--space-3);
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(255, 255, 255, 0.6);
 }

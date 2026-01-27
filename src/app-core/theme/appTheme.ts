@@ -1,13 +1,13 @@
-// App-wide theme tokens
+// アプリ全体のテーマトークン
 export const appTheme = {
-    // Font families
+    // フォントファミリー
     fonts: {
         primary: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
         display: '"Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
         mono: '"JetBrains Mono", "Fira Code", monospace',
     },
 
-    // Font sizes
+    // フォントサイズ
     fontSizes: {
         xs: '0.75rem',    // 12px
         sm: '0.875rem',   // 14px
@@ -21,7 +21,7 @@ export const appTheme = {
         '6xl': '3.75rem', // 60px
     },
 
-    // Spacing scale
+    // スペーシングスケール
     spacing: {
         0: '0',
         1: '0.25rem',   // 4px
@@ -38,7 +38,7 @@ export const appTheme = {
         24: '6rem',     // 96px
     },
 
-    // Border radius
+    // 角丸
     radius: {
         none: '0',
         sm: '0.125rem',   // 2px
@@ -50,7 +50,7 @@ export const appTheme = {
         full: '9999px',
     },
 
-    // Shadows
+    // 影
     shadows: {
         sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
         base: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1)',
@@ -59,7 +59,7 @@ export const appTheme = {
         xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
     },
 
-    // Z-index scale
+    // Z-index スケール
     zIndex: {
         hide: -1,
         base: 0,
@@ -75,7 +75,7 @@ export const appTheme = {
         header: 100,
     },
 
-    // Animations
+    // アニメーション
     transitions: {
         fast: '150ms ease',
         base: '200ms ease',
@@ -84,7 +84,7 @@ export const appTheme = {
         sky: '800ms cubic-bezier(0.4, 0, 0.2, 1)',
     },
 
-    // Line heights
+    // 行の高さ
     lineHeights: {
         none: 1,
         tight: 1.25,
@@ -94,7 +94,7 @@ export const appTheme = {
         loose: 2,
     },
 
-    // Letter spacing
+    // 文字間隔
     letterSpacing: {
         tighter: '-0.05em',
         tight: '-0.025em',

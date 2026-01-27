@@ -1,25 +1,33 @@
-import { notFound } from 'next/navigation';
-import { WorkDetailView } from '@/features/works/workDetailView';
-import { mockWorks } from '@/features/works/services/worksService';
+import { mockWorks, fetchWorks } from '@/features/works/services/worksService';
+import { WorkDetailClient } from './WorkDetailClient';
 
 interface Props {
     params: Promise<{ slug: string }>;
 }
 
-// Generate static params for all works
+// すべての作品の静的パラメータを生成（モック + Firestore）
 export async function generateStaticParams() {
-    return mockWorks.map((work) => ({
+    // モックデータのslugを取得
+    const mockSlugs = mockWorks.map((work) => ({
         slug: work.slug,
     }));
+
+    // Firestoreからも取得を試みる
+    try {
+        const firestoreWorks = await fetchWorks();
+        const firestoreSlugs = firestoreWorks
+            .filter(work => !mockWorks.some(m => m.slug === work.slug))
+            .map((work) => ({
+                slug: work.slug,
+            }));
+        return [...mockSlugs, ...firestoreSlugs];
+    } catch {
+        // Firestoreに接続できない場合はモックのみ返す
+        return mockSlugs;
+    }
 }
 
 export default async function WorkDetailPage({ params }: Props) {
-    const resolvedParams = await params;
-    const work = mockWorks.find((w) => w.slug === resolvedParams.slug);
-
-    if (!work) {
-        notFound();
-    }
-
-    return <WorkDetailView work={work} />;
+    const { slug } = await params;
+    return <WorkDetailClient slug={slug} />;
 }

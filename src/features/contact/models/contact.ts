@@ -1,4 +1,4 @@
-// Contact form types
+// お問い合わせフォームの型
 export interface ContactFormData {
     name: string;
     email: string;

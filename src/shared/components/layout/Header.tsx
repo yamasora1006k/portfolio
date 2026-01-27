@@ -11,7 +11,7 @@ export function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
 
-    // Handle scroll for header background
+    // ヘッダー背景のスクロール処理
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 50);
@@ -21,7 +21,7 @@ export function Header() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Close menu on route change
+    // ルートが変わったらメニューを閉じる
     useEffect(() => {
         setIsMenuOpen(false);
     }, [pathname]);
@@ -31,12 +31,12 @@ export function Header() {
             className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}
         >
             <div className={styles.container}>
-                {/* Logo - centered */}
+                {/* ロゴ（中央配置） */}
                 <Link href="/" className={styles.logo}>
-                    <span className={styles.logoText}>SKY VARIANTS</span>
+                    <span className={styles.logoText}>Sora Studio</span>
                 </Link>
 
-                {/* Desktop Navigation */}
+                {/* デスクトップナビゲーション */}
                 <nav className={styles.desktopNav}>
                     <ul className={styles.navList}>
                         {NAV_LINKS.map(link => (
@@ -47,7 +47,7 @@ export function Header() {
                                         }`}
                                 >
                                     <span className={styles.navLinkText}>{link.label}</span>
-                                    {/* Symmetric underline */}
+                                    {/* 対称下線 */}
                                     <span className={styles.navLinkUnderline} />
                                 </Link>
                             </li>
@@ -55,7 +55,7 @@ export function Header() {
                     </ul>
                 </nav>
 
-                {/* Mobile Menu Button */}
+                {/* モバイルメニューボタン */}
                 <button
                     className={`${styles.menuButton} ${isMenuOpen ? styles.open : ''}`}
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -68,7 +68,7 @@ export function Header() {
                 </button>
             </div>
 
-            {/* Mobile Navigation */}
+            {/* モバイルナビゲーション */}
             <nav
                 className={`${styles.mobileNav} ${isMenuOpen ? styles.open : ''}`}
                 aria-hidden={!isMenuOpen}

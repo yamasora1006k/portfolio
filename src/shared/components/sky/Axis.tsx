@@ -8,10 +8,10 @@ export function Axis() {
     const { skyState, isReady } = useSky();
     const [isHighlighting, setIsHighlighting] = useState(true);
 
-    // Entry highlight animation
+    // 入場時のハイライトアニメーション
     useEffect(() => {
         if (isReady) {
-            // Highlight on entry
+            // 表示開始時にハイライト
             setIsHighlighting(true);
 
             const timer = setTimeout(() => {
@@ -31,10 +31,10 @@ export function Axis() {
             }}
             aria-hidden="true"
         >
-            {/* Central vertical line */}
+            {/* 中央の縦ライン */}
             <div className={styles.line} />
 
-            {/* Glow effect */}
+            {/* グローエフェクト */}
             <div className={styles.glow} />
         </div>
     );

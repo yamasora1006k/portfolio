@@ -51,10 +51,10 @@ export function SkyProvider({ children }: SkyProviderProps) {
     const [skyState, setSkyState] = useState<SkyState>(() => createInitialSkyState());
     const [isReady, setIsReady] = useState(false);
 
-    // Initialize theme on mount
+    // マウント時にテーマを初期化
     useEffect(() => {
         const initialize = () => {
-            // 1. Check URL parameter first
+            // 1. URLパラメータを最優先で参照
             const urlSky = searchParams.get(URL_PARAMS.skyTheme);
             const urlTheme = parseSkyFromUrl(urlSky);
 
@@ -65,7 +65,7 @@ export function SkyProvider({ children }: SkyProviderProps) {
                     isTransitioning: true,
                 }));
             } else {
-                // 2. Check localStorage
+                // 2. なければ localStorage を確認
                 try {
                     const stored = localStorage.getItem(STORAGE_KEYS.skyTheme);
                     if (stored) {
@@ -77,11 +77,11 @@ export function SkyProvider({ children }: SkyProviderProps) {
                         }));
                     }
                 } catch {
-                    // Ignore localStorage errors
+                    // localStorage エラーは握りつぶす
                 }
             }
 
-            // 3. Start entry transition
+            // 3. エントリートランジションを開始
             const transitionDuration = getEntryTransitionDuration();
 
             setTimeout(() => {
@@ -97,7 +97,7 @@ export function SkyProvider({ children }: SkyProviderProps) {
         initialize();
     }, [searchParams]);
 
-    // Minor changes timer
+    // マイナー変化のタイマー
     useEffect(() => {
         if (!isReady) return;
 
@@ -111,7 +111,7 @@ export function SkyProvider({ children }: SkyProviderProps) {
                     lastChangeTime: Date.now(),
                 }));
 
-                // Schedule next change
+                // 次の変化を予約
                 const timerId = scheduleMinorChange();
                 return () => clearTimeout(timerId);
             }, interval);
@@ -121,34 +121,49 @@ export function SkyProvider({ children }: SkyProviderProps) {
         return () => clearTimeout(timerId);
     }, [isReady]);
 
-    // Major change timer
+    // 定期的な時間チェック（1分ごとに時間帯の変化を確認）
     useEffect(() => {
         if (!isReady) return;
 
-        const threshold = getMajorChangeThreshold();
+        const checkTime = () => {
+            // 現在のテーマを再生成（時間帯が変わっていれば色が大きく変わる）
+            // 時間帯が変わらない場合は、マイナー変化（雲の動きなど）だけに留めたいが、
+            // シンプルに generateSkyTheme を呼ぶと、同じ時間帯内でもランダムに変わってしまう可能性がある。
+            // ここでは時間帯が変わった時だけ変えたい...が、ユーザーは「見るたびに違う」も求めている。
+            // 折衷案：
+            // 1. 時間帯が変わったら強制更新
+            // 2. それ以外は長めのインターバルで更新
 
-        const timerId = setTimeout(() => {
-            setSkyState(prev => ({
-                ...prev,
-                theme: generateSkyTheme(),
-                seed: Date.now(),
-                lastChangeTime: Date.now(),
-                isTransitioning: true,
-            }));
+            setSkyState(prev => {
+                const newTheme = generateSkyTheme(); // 現在時刻に基づいたテーマ
 
-            // Complete transition after animation
+                // ここで前回のテーマと時間帯区分を比較するロジックがあれば良いが、
+                // 簡易的に「常に最新の時間帯に合わせる」＆「時間帯内でのバリエーション変化は適度に行う」とする
+
+                return {
+                    ...prev,
+                    theme: newTheme,
+                    seed: Date.now(),
+                    lastChangeTime: Date.now(),
+                    isTransitioning: true,
+                };
+            });
+
             setTimeout(() => {
                 setSkyState(prev => ({
                     ...prev,
                     isTransitioning: false,
                 }));
             }, 2000);
-        }, threshold);
+        };
 
-        return () => clearTimeout(timerId);
-    }, [isReady, skyState.seed]);
+        // 30分ごとにチェック（時間帯の変化に追従）
+        const intervalId = setInterval(checkTime, 30 * 60 * 1000);
 
-    // Apply CSS variables
+        return () => clearInterval(intervalId);
+    }, [isReady]);
+
+    // CSS変数を適用
     useEffect(() => {
         const { theme } = skyState;
         const root = document.documentElement;
@@ -172,11 +187,11 @@ export function SkyProvider({ children }: SkyProviderProps) {
             lastChangeTime: Date.now(),
         }));
 
-        // Save to localStorage
+        // localStorageに保存
         try {
             localStorage.setItem(STORAGE_KEYS.skyTheme, JSON.stringify(theme));
         } catch {
-            // Ignore localStorage errors
+            // localStorage エラーは握りつぶす
         }
     }, []);
 

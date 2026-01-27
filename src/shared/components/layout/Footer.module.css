@@ -10,7 +10,7 @@
     margin: 0 auto;
 }
 
-/* Decorative cloud divider */
+/* 装飾用の雲の区切り線 */
 .decorativeLine {
     display: flex;
     align-items: center;
@@ -35,7 +35,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Content */
+/* コンテンツ */
 .content {
     display: flex;
     flex-direction: column;
@@ -85,7 +85,7 @@
     margin: 0;
 }
 
-/* Links */
+/* リンク */
 .links {
     display: flex;
     gap: 2rem;
@@ -102,7 +102,7 @@
     color: var(--sky-accent);
 }
 
-/* Copyright */
+/* コピーライト */
 .copyright {
     margin-top: 3rem;
     padding-top: 1.5rem;

@@ -1,0 +1,272 @@
+.page {
+    min-height: 100vh;
+    padding: var(--space-8) var(--space-6);
+}
+
+/* ローディング・エラー */
+.loading,
+.notFound {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    gap: var(--space-6);
+    color: var(--sky-text-secondary);
+}
+
+.notFound h1 {
+    font-size: var(--text-2xl);
+    font-weight: 400;
+    color: var(--sky-text-primary);
+}
+
+/* ヘッダー */
+.header {
+    max-width: 1400px;
+    margin: 0 auto var(--space-12);
+    padding: 0 var(--space-4);
+}
+
+.backLink {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--sky-text-secondary);
+    margin-bottom: var(--space-6);
+    transition: color 0.2s ease;
+}
+
+.backLink:hover {
+    color: var(--sky-text-primary);
+}
+
+.titleArea {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-4);
+}
+
+.categoryNumber {
+    font-size: var(--text-lg);
+    color: var(--sky-accent);
+    font-weight: 500;
+    font-family: var(--font-mono);
+}
+
+.title {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 300;
+    color: var(--sky-text-primary);
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
+}
+
+.description {
+    font-size: var(--text-base);
+    color: var(--sky-text-secondary);
+    margin-top: var(--space-2);
+}
+
+/* 作品一覧 */
+.worksSection {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+}
+
+/* シンプルなグリッド */
+.worksGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-4);
+}
+
+@media (min-width: 768px) {
+    .worksGrid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 1200px) {
+    .worksGrid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+/* シンプルな作品カード - 画像のみ表示 */
+.workCard {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    animation: fadeIn 0.5s ease forwards;
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.cardImage {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.workCard:hover .thumbnail {
+    transform: scale(1.05);
+}
+
+.placeholderImage {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #e8f4f8 0%, #d0e8f0 100%);
+    color: var(--sky-text-secondary);
+    font-size: var(--text-sm);
+    text-align: center;
+    padding: var(--space-4);
+}
+
+/* ホバー時のオーバーレイ */
+.cardContent {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: var(--space-4);
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.8) 0%,
+            rgba(0, 0, 0, 0.4) 50%,
+            transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.workCard:hover .cardContent {
+    opacity: 1;
+}
+
+.workTitle {
+    font-size: var(--text-base);
+    font-weight: 500;
+    color: white;
+    margin-bottom: var(--space-1);
+}
+
+.workDescription {
+    font-size: var(--text-xs);
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.workMeta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+}
+
+.workYear {
+    font-size: var(--text-xs);
+    color: rgba(255, 255, 255, 0.6);
+    font-family: var(--font-mono);
+}
+
+.workTechnologies {
+    display: none;
+}
+
+.techBadge {
+    display: none;
+}
+
+/* 空の状態 */
+.emptyState {
+    text-align: center;
+    padding: var(--space-16);
+    color: var(--sky-text-secondary);
+}
+
+/* 他のカテゴリ */
+.otherCategories {
+    max-width: 1400px;
+    margin: var(--space-16) auto 0;
+    padding: var(--space-8) var(--space-4);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.otherTitle {
+    font-size: var(--text-xs);
+    font-weight: 500;
+    color: var(--sky-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-6);
+}
+
+.categoryLinks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+}
+
+.categoryLink {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: var(--radius-full);
+    transition: all 0.3s ease;
+    font-size: var(--text-sm);
+}
+
+.categoryLink:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
+}
+
+.categoryLinkNumber {
+    font-size: var(--text-xs);
+    color: var(--sky-accent);
+    font-family: var(--font-mono);
+}
+
+.categoryLinkName {
+    color: var(--sky-text-primary);
+    font-weight: 400;
+    text-transform: lowercase;
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+    .worksGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+}
