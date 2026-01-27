@@ -207,3 +207,70 @@
     font-size: var(--text-base);
     color: var(--text-on-card-secondary);
 }
+
+/* ========================================
+   モバイル対応 (768px以下)
+   ======================================== */
+@media (max-width: 768px) {
+    .aboutPage {
+        padding: var(--space-4) 0 var(--space-16);
+    }
+
+    .header {
+        margin-bottom: var(--space-10);
+    }
+
+    .profile {
+        padding: var(--space-6);
+        margin: 0 var(--space-2) var(--space-12);
+        border-radius: var(--radius-lg);
+    }
+
+    .name {
+        font-size: var(--text-2xl);
+    }
+
+    .role {
+        font-size: var(--text-base);
+    }
+
+    .bio p {
+        font-size: var(--text-sm);
+    }
+
+    .skills {
+        margin-bottom: var(--space-12);
+    }
+
+    .skillsGrid {
+        gap: var(--space-3);
+    }
+
+    .skillGroup {
+        padding: var(--space-4);
+        border-radius: var(--radius-lg);
+    }
+
+    .skillCategory {
+        font-size: var(--text-xs);
+        margin-bottom: var(--space-3);
+    }
+
+    .skillItem {
+        font-size: var(--text-xs);
+    }
+
+    .experience {
+        padding: var(--space-6);
+        margin: 0 var(--space-2);
+        border-radius: var(--radius-lg);
+    }
+
+    .timelineTitle {
+        font-size: var(--text-lg);
+    }
+
+    .timelineDescription {
+        font-size: var(--text-sm);
+    }
+}

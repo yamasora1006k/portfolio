@@ -249,3 +249,85 @@
     background: var(--sky-accent);
     color: white;
 }
+
+/* ========================================
+   モバイル対応 (768px以下)
+   ======================================== */
+@media (max-width: 768px) {
+    .detailPage {
+        padding: var(--space-4);
+    }
+
+    .backLink {
+        margin-bottom: var(--space-4);
+    }
+
+    /* 画像カラム */
+    .imageColumn {
+        position: static;
+    }
+
+    .heroImage {
+        border-radius: var(--radius-lg);
+    }
+
+    .gallery {
+        gap: var(--space-2);
+        margin-top: var(--space-3);
+    }
+
+    .galleryItem {
+        border-radius: var(--radius-md);
+    }
+
+    /* ヘッダー */
+    .title {
+        font-size: var(--text-2xl);
+    }
+
+    .description {
+        font-size: var(--text-sm);
+    }
+
+    /* タグ */
+    .tags {
+        gap: var(--space-1);
+    }
+
+    .tag {
+        padding: 3px 10px;
+        font-size: 11px;
+    }
+
+    /* リンク */
+    .links {
+        flex-wrap: wrap;
+        gap: var(--space-2);
+    }
+
+    .linkButton,
+    .linkButtonOutline {
+        padding: var(--space-2) var(--space-4);
+        font-size: var(--text-xs);
+    }
+
+    /* 詳細セクション */
+    .details {
+        padding: var(--space-4);
+        border-radius: var(--radius-lg);
+    }
+
+    .sectionTitle {
+        font-size: var(--text-xs);
+    }
+
+    .sectionContent {
+        font-size: var(--text-xs);
+    }
+
+    /* ナビゲーション */
+    .navLink {
+        padding: var(--space-2) var(--space-4);
+        font-size: var(--text-xs);
+    }
+}

@@ -376,3 +376,116 @@
         font-size: 2rem;
     }
 }
+
+/* スマートフォン対応 (768px以下) */
+@media (max-width: 768px) {
+    .worksPage {
+        padding: var(--space-4) var(--space-4);
+    }
+
+    .header {
+        padding: 0 var(--space-2);
+        margin-bottom: var(--space-8);
+    }
+
+    .title {
+        font-size: clamp(2rem, 8vw, 3rem);
+    }
+
+    .content {
+        padding: 0 var(--space-2);
+        gap: var(--space-4);
+    }
+
+    .categories {
+        padding-top: var(--space-6);
+        gap: var(--space-4);
+    }
+
+    .categoryCloud {
+        gap: var(--space-3);
+    }
+
+    .categoryCloud:hover,
+    .categoryCloud.active {
+        transform: translateX(10px);
+    }
+
+    .categoryNumber {
+        font-size: var(--text-xs);
+        min-width: 24px;
+    }
+
+    .categoryText {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+    }
+
+    /* プレビューエリア - モバイルでは縮小 */
+    .previews {
+        min-height: 250px;
+    }
+
+    .previewContainer {
+        min-height: 250px;
+    }
+
+    .previewCard {
+        width: 100px;
+        height: 130px;
+    }
+
+    /* カテゴリラベル */
+    .activeCategoryLabel {
+        min-width: 200px;
+        min-height: 120px;
+        padding: var(--space-8) var(--space-10);
+        bottom: 10%;
+    }
+
+    .labelText {
+        font-size: var(--text-xl);
+    }
+
+    .labelDescription {
+        font-size: var(--text-xs);
+        max-width: 200px;
+    }
+
+    /* 作品数バッジ */
+    .workCount {
+        right: -30px;
+        font-size: 10px;
+        padding: 3px 8px;
+    }
+
+    /* 全作品リンク */
+    .allWorksLink {
+        padding: var(--space-8) 0;
+    }
+
+    .viewAllButton {
+        padding: var(--space-3) var(--space-6);
+        font-size: var(--text-sm);
+    }
+}
+
+/* 極小デバイス (480px以下) */
+@media (max-width: 480px) {
+    .content {
+        grid-template-columns: 1fr;
+    }
+
+    /* プレビューを非表示にしてカテゴリだけ表示 */
+    .previews {
+        display: none;
+    }
+
+    .categoryText {
+        font-size: 1.5rem;
+    }
+
+    .categoryCloud:hover,
+    .categoryCloud.active {
+        transform: translateX(5px);
+    }
+}

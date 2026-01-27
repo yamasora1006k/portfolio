@@ -199,3 +199,70 @@
     background: var(--sky-accent);
     color: white;
 }
+
+/* ========================================
+   モバイル対応 (768px以下)
+   ======================================== */
+@media (max-width: 768px) {
+    .contactPage {
+        padding: var(--space-4) 0 var(--space-16);
+    }
+
+    .header {
+        margin-bottom: var(--space-8);
+    }
+
+    .subtitle {
+        font-size: var(--text-sm);
+    }
+
+    .formWrapper {
+        padding: var(--space-6);
+        margin: 0 var(--space-2);
+        border-radius: var(--radius-lg);
+    }
+
+    .form {
+        gap: var(--space-4);
+    }
+
+    .label {
+        font-size: var(--text-xs);
+    }
+
+    .input,
+    .select,
+    .textarea {
+        padding: var(--space-3);
+        font-size: var(--text-sm);
+        border-radius: var(--radius-md);
+    }
+
+    .textarea {
+        min-height: 120px;
+    }
+
+    .submitButton {
+        padding: var(--space-3) var(--space-6);
+        font-size: var(--text-sm);
+        min-height: 44px;
+    }
+
+    .successMessage {
+        padding: var(--space-6);
+    }
+
+    .successIcon {
+        width: 48px;
+        height: 48px;
+        font-size: var(--text-2xl);
+    }
+
+    .successTitle {
+        font-size: var(--text-xl);
+    }
+
+    .successText {
+        font-size: var(--text-sm);
+    }
+}

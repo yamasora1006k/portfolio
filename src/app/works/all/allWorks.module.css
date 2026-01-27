@@ -120,3 +120,43 @@
     min-height: 50vh;
     color: var(--sky-text-secondary);
 }
+
+/* ========================================
+   モバイル対応 (768px以下)
+   ======================================== */
+@media (max-width: 768px) {
+    .container {
+        padding: var(--space-4) var(--space-4);
+    }
+
+    .header {
+        margin-bottom: var(--space-8);
+        padding: 0 var(--space-2);
+    }
+
+    .title {
+        font-size: clamp(1.5rem, 6vw, 2.5rem);
+    }
+
+    .grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: var(--space-4);
+        padding: 0 var(--space-2);
+    }
+
+    .info {
+        padding: var(--space-4);
+    }
+
+    .workTitle {
+        font-size: var(--text-base);
+    }
+
+    .workCategory {
+        font-size: var(--text-xs);
+    }
+
+    .year {
+        font-size: 10px;
+    }
+}

@@ -165,3 +165,66 @@
         transform: translateY(0);
     }
 }
+
+/* ========================================
+   モバイル対応 (768px以下)
+   ======================================== */
+@media (max-width: 768px) {
+    .container {
+        padding-top: var(--space-24);
+        padding-left: var(--space-2);
+        padding-right: var(--space-2);
+    }
+
+    .article {
+        padding: var(--space-4);
+        border-radius: var(--radius-xl);
+    }
+
+    .header {
+        margin-bottom: var(--space-8);
+        padding-bottom: var(--space-6);
+    }
+
+    .meta {
+        flex-wrap: wrap;
+        gap: var(--space-2);
+    }
+
+    .title {
+        font-size: var(--text-2xl);
+    }
+
+    .thumbnailWrapper {
+        margin: var(--space-6) 0;
+        border-radius: var(--radius-lg);
+    }
+
+    /* Markdown Styles */
+    .content {
+        font-size: var(--text-sm);
+    }
+
+    .content h2 {
+        font-size: var(--text-xl);
+    }
+
+    .content h3 {
+        font-size: var(--text-lg);
+    }
+
+    .content pre {
+        padding: var(--space-4);
+        border-radius: var(--radius-md);
+        font-size: var(--text-xs);
+    }
+
+    .content blockquote {
+        padding: var(--space-3);
+        margin: var(--space-6) 0;
+    }
+
+    .backLink {
+        margin-bottom: var(--space-4);
+    }
+}

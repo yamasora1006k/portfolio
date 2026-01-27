@@ -1,6 +1,7 @@
 .home {
     opacity: 0;
     transition: opacity 0.8s ease;
+    overflow-x: hidden;
 }
 
 .home.ready {
@@ -823,4 +824,192 @@
     background: rgba(255, 255, 255, 0.5);
     border-radius: var(--radius-full);
     border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+/* ========================================
+   モバイル対応 (768px以下)
+   ======================================== */
+@media (max-width: 768px) {
+
+    /* ヒーローセクション */
+    .hero {
+        padding: var(--space-4);
+        padding-bottom: 15vh;
+        min-height: auto;
+    }
+
+    .heroLayout {
+        padding: 0 var(--space-2);
+        gap: var(--space-8);
+    }
+
+    .subtitle {
+        font-size: var(--text-base);
+        margin-bottom: var(--space-2);
+    }
+
+    .title {
+        margin-bottom: var(--space-6);
+    }
+
+    .titleLine,
+    .titleWord {
+        font-size: clamp(2.5rem, 12vw, 5rem);
+    }
+
+    /* CTAボタン */
+    .ctaButton {
+        padding: var(--space-4) var(--space-6);
+        gap: var(--space-3);
+    }
+
+    .ctaText {
+        font-size: var(--text-base);
+    }
+
+    .ctaIcon {
+        width: 28px;
+        height: 28px;
+    }
+
+    /* スクロールインジケーター */
+    .scrollIndicator {
+        left: var(--space-4);
+        bottom: var(--space-6);
+    }
+
+    .scrollLine {
+        height: 40px;
+    }
+
+    /* 作品セクション */
+    .featured {
+        padding: var(--space-12) 0;
+    }
+
+    .featured::before {
+        font-size: clamp(4rem, 15vw, 8rem);
+        left: -10px;
+    }
+
+    .featuredGrid {
+        gap: var(--space-4);
+        padding-bottom: var(--space-4);
+        width: 100%;
+        max-width: 100vw;
+    }
+
+    .featuredCard {
+        flex: 0 0 260px;
+    }
+
+    .cardInfo {
+        padding: var(--space-4);
+    }
+
+    .cardTitle {
+        font-size: var(--text-lg);
+    }
+
+    .cardCategory {
+        font-size: var(--text-xs);
+    }
+
+    .viewAll {
+        padding-top: var(--space-4);
+    }
+
+    .viewAllLink {
+        font-size: var(--text-sm);
+        padding: var(--space-2) var(--space-6);
+    }
+
+    /* Aboutプレビュー */
+    .aboutPreview {
+        padding: var(--space-16) 0;
+        justify-content: center;
+    }
+
+    .aboutContent {
+        text-align: center;
+        padding: 0 var(--space-4);
+        margin: 0 auto;
+    }
+
+    .aboutContent::before {
+        font-size: clamp(4rem, 15vw, 8rem);
+        right: auto;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .section-heading span {
+        font-size: var(--text-3xl);
+    }
+
+    .aboutText {
+        font-size: var(--text-base);
+        line-height: 1.9;
+        margin-bottom: var(--space-8);
+    }
+
+    .aboutLink {
+        font-size: var(--text-sm);
+        padding: var(--space-2) var(--space-6);
+    }
+
+    /* ブログセクション */
+    .blog {
+        padding: var(--space-12) 0;
+        text-align: center;
+    }
+
+    .blog::before {
+        font-size: clamp(4rem, 15vw, 8rem);
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .blogGrid {
+        flex-direction: row;
+        gap: var(--space-4);
+        padding-bottom: var(--space-4);
+    }
+
+    .blogCard {
+        flex: 0 0 260px;
+        padding: var(--space-6);
+    }
+
+    .blogTitle {
+        font-size: var(--text-base);
+    }
+
+    .blogDate {
+        font-size: var(--text-xs);
+    }
+}
+
+/* 極小デバイス対応 (480px以下) */
+@media (max-width: 480px) {
+    .heroLayout {
+        padding: 0;
+    }
+
+    .titleLine,
+    .titleWord {
+        font-size: clamp(2rem, 14vw, 3.5rem);
+    }
+
+    .featuredCard,
+    .blogCard {
+        flex: 0 0 85vw;
+    }
+
+    .activeCategoryLabel {
+        min-width: 200px;
+        min-height: 120px;
+        padding: var(--space-8) var(--space-10);
+    }
 }

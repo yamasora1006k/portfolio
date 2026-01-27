@@ -154,6 +154,9 @@
     left: 0;
     right: 0;
     bottom: 0;
+    height: 100vh;
+    height: 100dvh;
+    /* dynamic viewport height for mobile browsers */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -162,12 +165,14 @@
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
-    z-index: -1;
+    z-index: 50;
+    pointer-events: none;
 }
 
 .mobileNav.open {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
 }
 
 .mobileNavList {
