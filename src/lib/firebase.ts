@@ -4,15 +4,15 @@ import { getFirestore, Firestore } from 'firebase/firestore';
 import { getStorage, FirebaseStorage } from 'firebase/storage';
 import { getAnalytics, Analytics, isSupported } from 'firebase/analytics';
 
-// Firebase設定
+// Firebase設定（環境変数から取得）
 const firebaseConfig = {
-    apiKey: "AIzaSyDFp7rEO9CGinsdCO_iNlThCFoAup0UAIg",
-    authDomain: "portfolio-7c47a.firebaseapp.com",
-    projectId: "portfolio-7c47a",
-    storageBucket: "portfolio-7c47a.firebasestorage.app",
-    messagingSenderId: "741745535098",
-    appId: "1:741745535098:web:1c455b463e7ad03552b3c3",
-    measurementId: "G-XQX1WRV41L"
+    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+    measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
 // Firebaseアプリの初期化（シングルトン）
