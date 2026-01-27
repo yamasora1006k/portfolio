@@ -22,6 +22,22 @@ import { BlogPost } from '../models/blog';
 
 const COLLECTION_NAME = 'posts';
 
+// モックブログデータ（静的エクスポート時のフォールバック用）
+export const mockBlogPosts: BlogPost[] = [
+    {
+        id: 'mock-1',
+        slug: 'welcome',
+        title: 'Welcome to My Blog',
+        content: 'This is a placeholder blog post. Add your own posts through the admin panel.',
+        excerpt: 'Welcome to my blog!',
+        date: '2026-01-01',
+        category: ['General'],
+        published: true,
+        createdAt: null as any,
+        updatedAt: null as any
+    }
+];
+
 // 記事一覧取得（公開済みのみ）
 export async function fetchBlogPosts(): Promise<BlogPost[]> {
     const db = getFirestoreDb();
