@@ -1,6 +1,8 @@
 import { mockWorks, fetchWorks } from '@/features/works/services/worksService';
 import { WorkDetailClient } from './WorkDetailClient';
 
+// 静的エクスポート時にダイナミックパラメータを無効化
+export const dynamicParams = false;
 interface Props {
     params: Promise<{ slug: string }>;
 }

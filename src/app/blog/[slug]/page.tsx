@@ -1,6 +1,9 @@
 import { BlogDetailView } from '@/features/blog/blogDetailView';
 import { fetchBlogPostSlugs } from '@/features/blog/services/blogService';
 
+// 静的エクスポート時にダイナミックパラメータを無効化
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
     try {
         const posts = await fetchBlogPostSlugs();

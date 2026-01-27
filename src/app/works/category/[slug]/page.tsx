@@ -1,6 +1,8 @@
 import { mockCategories } from '@/features/works/services/categoryService';
 import { CategoryPageClient } from './CategoryPageClient';
 
+// 静的エクスポート時にダイナミックパラメータを無効化
+export const dynamicParams = false;
 // 静的エクスポート用：ビルド時にすべてのカテゴリスラッグを生成
 export function generateStaticParams() {
     return mockCategories.map((category) => ({
