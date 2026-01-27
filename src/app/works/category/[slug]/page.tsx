@@ -1,13 +1,23 @@
-import { mockCategories } from '@/features/works/services/categoryService';
+import { mockCategories, fetchCategories } from '@/features/works/services/categoryService';
 import { CategoryPageClient } from './CategoryPageClient';
 
 // 静的エクスポート時にダイナミックパラメータを無効化
 export const dynamicParams = false;
+
 // 静的エクスポート用：ビルド時にすべてのカテゴリスラッグを生成
-export function generateStaticParams() {
-    return mockCategories.map((category) => ({
-        slug: category.slug,
-    }));
+export async function generateStaticParams() {
+    try {
+        // Firestoreからカテゴリを取得
+        const categories = await fetchCategories();
+        return categories.map((category) => ({
+            slug: category.slug,
+        }));
+    } catch {
+        // エラー時はモックデータを使用
+        return mockCategories.map((category) => ({
+            slug: category.slug,
+        }));
+    }
 }
 
 interface PageProps {

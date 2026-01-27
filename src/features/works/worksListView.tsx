@@ -22,9 +22,6 @@ function CategoryCloud({
     onHover: (cat: Category | null) => void;
     workCount: number;
 }) {
-    // インデックスに基づいて雲の画像を切り替え（3種類をループ）
-    const cloudImage = `/portfolio/assets/works/cloud_${(index % 3) + 1}.png`;
-
     return (
         <Link
             href={`/works/category/${category.slug}`}
@@ -33,13 +30,6 @@ function CategoryCloud({
             onMouseLeave={() => onHover(null)}
             style={{ animationDelay: `${index * 0.1}s` }}
         >
-            <div className={styles.cloudImageContainer}>
-                <img
-                    src={cloudImage}
-                    alt="" // Decorative
-                    className={styles.cloudImage}
-                />
-            </div>
             <span className={styles.categoryNumber}>0{index + 1}</span>
             <span className={styles.categoryText}>{category.name}</span>
             {workCount > 0 && (
